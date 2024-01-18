@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Chessboard with Customizable Red Perimeter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="controls">
+        <label for="squareSize">Ternstørrelse</label>
+        <input type="number" id="squareSize" value="10" min="5" step="5">
+        <label for="interval">Farveinterval (ms)</label>
+        <input type="number" id="interval" value="500">
+    
+        <label for="topRed">Top</label>
+        <select id="topRed">
+            <option value="0">Ingen</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <label for="rightRed">Højre</label>
+        <select id="rightRed">
+            <option value="0">Ingen</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <label for="bottomRed">Bund</label>
+        <select id="bottomRed">
+            <option value="0">Ingen</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <label for="leftRed">Venstre</label>
+        <select id="leftRed">
+            <option value="0">Ingen</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        
+        <label for="redSquareOffset">Offset røde tern</label>
+        <select id="redSquareOffset">
+            <option value="0">0</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="60">60</option>
+            <option value="70">70</option>
+            <option value="80">80</option>
+            <!-- Add more options as needed -->
+        </select>
+        <label for="redSquareSizeMultiplier">Størrelse røde tern</label>
+        <select id="redSquareSizeMultiplier">
+            <option value="1">1x</option>
+            <option value="2">2x</option>
+            <option value="3">3x</option>
+        </select>
+        <button onclick="updateSettings()">Opdater</button>
+    </div>
+    <div id="chessboard-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>

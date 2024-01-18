@@ -1,0 +1,45 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+#controls {
+    background-color: #f8f8f8;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+#controls > label, #controls > input, #controls > select, #controls > button {
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+#chessboard-container {
+    position: absolute;
+    top: 60px; /* Adjust based on the dynamic height of your controls */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    #controls {
+        justify-content: center;
+    }
+
+    #controls > label, #controls > input, #controls > select, #controls > button {
+        margin-right: 10px;
+    }
+
+    #chessboard-container {
+        top: 100px; /* Increase top offset for smaller screens if needed */
+    }
+}
