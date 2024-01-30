@@ -4,9 +4,9 @@ let lastTimeSwitched = 0;
 let interval = 500; // Farveskift interval i millisekunder
 let squareSize = 10; // Størrelse af hvert skaktern
 let redSquares = { top: 0, right: 0, bottom: 0, left: 0 };
-let redSquareOffset = 0; // Offset mod centrum
+let redSquareOffset = 10; // Offset mod centrum
 let redSquareSizeMultiplier = 1; // Størrelsesmultiplikator
-let cornerSquareOffset = 0; // Offset for hjørnefirkanter
+let cornerSquareOffset = 10; // Offset for hjørnefirkanter
 
 // Status for hjørnefirkanter
 let topLeftCorner = false;
@@ -172,6 +172,24 @@ function updateSettingsFromURL() {
 
 // Funktion til at opdatere brugergrænsefladen med de nuværende indstillinger
 function updateGUI() {
+    document.getElementById('squareSize').value = squareSize;
+    document.getElementById('interval').value = interval;
+    document.getElementById('topRed').value = redSquares.top;
+    document.getElementById('rightRed').value = redSquares.right;
+    document.getElementById('bottomRed').value = redSquares.bottom;
+    document.getElementById('leftRed').value = redSquares.left;
     document.getElementById('redSquareOffset').value = redSquareOffset;
     document.getElementById('redSquareSizeMultiplier').value = redSquareSizeMultiplier;
+    document.getElementById('cornerSquareOffset').value = cornerSquareOffset;
+    document.getElementById('topLeftCorner').checked = topLeftCorner;
+    document.getElementById('topRightCorner').checked = topRightCorner;
+    document.getElementById('bottomLeftCorner').checked = bottomLeftCorner;
+    document.getElementById('bottomRightCorner').checked = bottomRightCorner;
 }
+
+window.onload = function() {
+    let searchParams = new URLSearchParams(window.location.search);
+    let squareSize = searchParams.get('squareSize');
+    console.log('squareSize:', squareSize); // Dette vil vise værdien af squareSize i konsollen
+    console.log('redSquareOffset:', redSquareOffset); // Tilføj dette for at se den hentede værdi
+  }
