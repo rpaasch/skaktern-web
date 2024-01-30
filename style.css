@@ -1,32 +1,42 @@
 body, html {
     margin: 0;
     padding: 0;
-    min-height: 100%;
-    overflow: hidden;
+    width: 100%; /* Sikre fuld bredde */
+    height: 100%; /* Sikre fuld højde */
+    display: flex; /* Gør body til en flex container */
+    flex-direction: column; /* Organiser børneelementer i en kolonne */
+    overflow: hidden; /* Forhindre unødvendig scroll */
 }
 
 #controls {
     background-color: #f8f8f8;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 1000;
+    z-index: 1; /* Sikrer at kontrolpanelet er over skakbrættet */
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: flex-start;
     box-sizing: border-box;
+    position: sticky;
+    top: 0;
 }
 
-#controls > label, #controls > input, #controls > select, #controls > button {
-    margin-right: 15px;
-    margin-bottom: 10px;
+#controls > fieldset {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+}
+
+#controls > button {
+    margin-top: 5px;
 }
 
 #chessboard-container {
-    position: absolute;
-    top: 60px; /* Adjust based on the dynamic height of your controls */
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: relative; /* Ændret fra absolute til relative */
+    flex-grow: 1; /* Gør at containeren fylder resten af den tilgængelige plads */
+    z-index: 0; /* Sikrer at skakbrættet ligger under kontrolpanelet */
+    width: 100%; /* Sikrer, at containeren tager hele den tilgængelige bredde */
+    overflow: hidden; /* Forhindrer unødvendig scroll inden i containeren */
 }
 
 /* Responsive adjustments for smaller screens */
@@ -35,11 +45,8 @@ body, html {
         justify-content: center;
     }
 
-    #controls > label, #controls > input, #controls > select, #controls > button {
-        margin-right: 10px;
-    }
-
-    #chessboard-container {
-        top: 100px; /* Increase top offset for smaller screens if needed */
+    #controls > fieldset {
+        width: 100%;
+        text-align: center;
     }
 }
