@@ -10,82 +10,94 @@
 </head>
 <body>
     <div id="controls">
-        <fieldset>
-            <legend>Generelle indstillinger</legend>
-            <label for="squareSize">Ternstørrelse:</label>
-            <input type="number" id="squareSize" value="10" min="5" step="5">
-            <label for="interval">Farveinterval (ms):</label>
-            <input type="number" id="interval" value="500">
-            <label for="redSquareSizeMultiplier">Størrelse røde tern</label>
-            <select id="redSquareSizeMultiplier">
-                <option value="1">1x</option>
-                <option value="2">2x</option>
-                <option value="3">3x</option>
-            </select>
-        </fieldset>
+        <form id="controlForm" class="menu">
+            <fieldset>
+                <legend>Generelle indstillinger</legend>
+                <label for="squareSize">Ternstørrelse:</label>
+                <input type="number" id="squareSize" value="10" min="5" step="5">
+                <label for="interval">Farveinterval (ms):</label>
+                <input type="number" id="interval" value="500">
+                <label for="redSquareSizeMultiplier">Størrelse røde tern</label>
+                <select id="redSquareSizeMultiplier">
+                    <option value="1">1x</option>
+                    <option value="2">2x</option>
+                    <option value="3">3x</option>
+                </select>
+            </fieldset>
 
-        <fieldset>
-            <legend>Kanter</legend>
-            <label for="topRed">Top:</label>
-            <select id="topRed">
-                <option value="0">Ingen</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-            <label for="rightRed">Højre:</label>
-            <select id="rightRed">
-                <option value="0">Ingen</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-            <label for="bottomRed">Bund:</label>
-            <select id="bottomRed">
-                <option value="0">Ingen</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-            <label for="leftRed">Venstre:</label>
-            <select id="leftRed">
-                <option value="0">Ingen</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-            <label for="redSquareOffset">Offset Kanter</label>
-            <select id="redSquareOffset">
-                <option value="0">0</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30">30</option>
-                <option value="40">40</option>
-                <option value="50">50</option>
-                <option value="60">60</option>
-                <option value="70">70</option>
-                <option value="80">80</option>
-            </select>
-        </fieldset>
+            <fieldset>
+                <legend>Kanter</legend>
+                <label for="topRed">Top:</label>
+                <select id="topRed">
+                    <option value="0">Ingen</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label for="rightRed">Højre:</label>
+                <select id="rightRed">
+                    <option value="0">Ingen</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label for="bottomRed">Bund:</label>
+                <select id="bottomRed">
+                    <option value="0">Ingen</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label for="leftRed">Venstre:</label>
+                <select id="leftRed">
+                    <option value="0">Ingen</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label for="redSquareOffset">Offset Kanter</label>
+                <select id="redSquareOffset">
+                    <option value="0">0</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="60">60</option>
+                    <option value="70">70</option>
+                    <option value="80">80</option>
+                </select>
+            </fieldset>
 
-        <fieldset>
-            <legend>Hjørner</legend>
-            
-            <label for="topLeftCorner">Top venstre</label>
-            <input type="checkbox" id="topLeftCorner">
-            <label for="topRightCorner">Top højre</label>
-            <input type="checkbox" id="topRightCorner">
-            <label for="bottomLeftCorner">Bund venstre</label>
-            <input type="checkbox" id="bottomLeftCorner">
-            <label for="bottomRightCorner">Bund højre</label>
-            <input type="checkbox" id="bottomRightCorner">
-            <label for="cornerSquareOffset">Offset Hjørner</label>
-            <input type="number" id="cornerSquareOffset" value="0" min="0">
-        </fieldset>
+            <fieldset>
+                <legend>Hjørner</legend>
+                
+                <label for="topLeftCorner">Top venstre</label>
+                <input type="checkbox" id="topLeftCorner">
+                <label for="topRightCorner">Top højre</label>
+                <input type="checkbox" id="topRightCorner">
+                <label for="bottomLeftCorner">Bund venstre</label>
+                <input type="checkbox" id="bottomLeftCorner">
+                <label for="bottomRightCorner">Bund højre</label>
+                <input type="checkbox" id="bottomRightCorner">
+                <label for="cornerSquareOffset">Offset Hjørner</label>
+                <input type="number" id="cornerSquareOffset" value="0" min="0">
+            </fieldset>
 
-        <button onclick="updateSettings()">Opdater</button>
+            <button type="submit">Opdater</button>
+        </form>
     </div>
     <div id="chessboard-container"></div>
     <script src="script.js"></script>
+    <script>
+        // JavaScript for at håndtere submit begivenheden
+        document.getElementById('controlForm').addEventListener('submit', function(event) {
+            // Forebyg formens standard handling
+            event.preventDefault();
+            
+            // Kald din updateSettings funktion
+            updateSettings();
+        });
+    </script>
 </body>
 </html>

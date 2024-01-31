@@ -50,3 +50,43 @@ body, html {
         text-align: center;
     }
 }
+
+.menu {
+    display: flex; /* Arrangerer børneelementer i en række */
+    align-items: center; /* Centrerer elementerne vertikalt */
+    justify-content: start; /* Starter elementerne fra venstre */
+    flex-wrap: wrap; /* Tillader elementerne at gå til næste linje, hvis de ikke passer */
+    padding: 10px; /* Lidt polstring omkring elementerne */
+    background-color: #f4f4f4; /* En baggrundsfarve (kan ændres) */
+    border-bottom: 1px solid #ccc; /* En tynd grænse i bunden for at adskille menuen */
+}
+
+.menu fieldset {
+    display: flex; /* Arrangerer børneelementer af fieldset i en række */
+    align-items: center; /* Centrerer elementerne vertikalt */
+    margin: 0 10px 10px 0; /* Tilføjer lidt margin */
+    padding: 0; /* Fjerner polstring */
+    border: none; /* Fjerner border */
+}
+
+.menu legend {
+    font-size: 0.9rem; /* Gør teksten for legend lidt mindre */
+    margin-right: 10px; /* Tilføjer lidt plads til højre for legend */
+    font-weight: bold; /* Gør teksten fed */
+}
+
+.menu label, .menu input, .menu select {
+    font-size: 0.8rem; /* Gør teksten mindre */
+    margin-right: 5px; /* Lidt plads til højre for hvert element */
+}
+
+.menu input, .menu select {
+    max-width: 120px; /* Begrænser bredden for at holde elementerne kompakte */
+}
+
+.menu button {
+    padding: 5px 10px; /* Mere kompakt polstring */
+    background-color: #007bff; /* En baggrundsfarve for knappen */
+    color: white; /* Tekstfarve for knappen */
+    border: none; /* Fjerner border */
+    cursor: pointer; /* Gør musemarkøren til en pointer
