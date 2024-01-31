@@ -1,7 +1,9 @@
-// Initialisering af variabler
+// Variabler for skakbræt-tilstand
 let isBlack = true;
 let lastTimeSwitched = 0;
 let interval = 500; // Farveskift interval i millisekunder
+
+// Variabler for skakbræt-udseende
 let squareSize = 10; // Størrelse af hvert skaktern
 let redSquares = { top: 0, right: 0, bottom: 0, left: 0 };
 let redSquareOffset = 10; // Offset mod centrum
@@ -20,7 +22,7 @@ function setup() {
     let canvas = createCanvas(chessboardContainer.offsetWidth, chessboardContainer.offsetHeight);
     canvas.parent('chessboard-container');
     noSmooth();
-    frameRate(30); // Sæt en rimelig billedrate
+    frameRate(60); // Sæt en rimelig billedrate
 
     updateSettingsFromURL(); // Opdater indstillinger baseret på URL-parametre
     updateGUI(); // Opdater indstillinger i brugergrænsefladen
@@ -187,9 +189,56 @@ function updateGUI() {
     document.getElementById('bottomRightCorner').checked = bottomRightCorner;
 }
 
-window.onload = function() {
-    let searchParams = new URLSearchParams(window.location.search);
-    let squareSize = searchParams.get('squareSize');
-    console.log('squareSize:', squareSize); // Dette vil vise værdien af squareSize i konsollen
-    console.log('redSquareOffset:', redSquareOffset); // Tilføj dette for at se den hentede værdi
-  }
+// Event Listener for at sikre, at scriptet kører efter DOM er fuldt indlæst
+document.addEventListener('DOMContentLoaded', function() {
+    // Event Listener for submit-begivenhed på form
+    document.getElementById('controlForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Forebyg formens standard handling
+        updateSettings(); // Opdater indstillinger baseret på form input
+        updateURL(); // Opdater URL'en med de nye indstillinger
+    });
+    // Tilføj event listener for 'Kopier link' knappen
+    document.getElementById('copyLinkButton').addEventListener('click', function() {
+        copyCurrentLink(); // Funktion til at kopiere link
+    });
+
+    // Tilføj event listener for 'Nulstil' knappen
+    document.getElementById('reloadButton').addEventListener('click', function() {
+        const urlWithoutParams = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.location.href = urlWithoutParams; // Sætter URL'en til versionen uden parametre og genindlæser siden
+    });
+
+    // Funktion til at opdatere URL med indstillinger som query-parametre
+    function updateURL() {
+        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?';
+        newUrl += 'squareSize=' + encodeURIComponent(squareSize) + '&';
+        newUrl += 'interval=' + encodeURIComponent(interval) + '&';
+        newUrl += 'redSquareSizeMultiplier=' + encodeURIComponent(redSquareSizeMultiplier) + '&';
+        newUrl += 'topRed=' + encodeURIComponent(redSquares.top) + '&';
+        newUrl += 'rightRed=' + encodeURIComponent(redSquares.right) + '&';
+        newUrl += 'bottomRed=' + encodeURIComponent(redSquares.bottom) + '&';
+        newUrl += 'leftRed=' + encodeURIComponent(redSquares.left) + '&';
+        newUrl += 'redSquareOffset=' + encodeURIComponent(redSquareOffset) + '&';
+        newUrl += 'topLeftCorner=' + topLeftCorner + '&';
+        newUrl += 'topRightCorner=' + topRightCorner + '&';
+        newUrl += 'bottomLeftCorner=' + bottomLeftCorner + '&';
+        newUrl += 'bottomRightCorner=' + bottomRightCorner + '&';
+        newUrl += 'cornerSquareOffset=' + encodeURIComponent(cornerSquareOffset);
+
+        window.history.pushState({ path: newUrl }, '', newUrl); // Opdater URL'en uden at genindlæse siden
+    }
+
+    // Funktioner til initialisering
+    updateSettingsFromURL();
+    updateGUI();
+});
+
+// Funktion til at kopiere det aktuelle link
+function copyCurrentLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function() {
+        console.log('Linket er kopieret til udklipsholderen');
+    }, function(err) {
+        console.error('Kunne ikke kopiere linket: ', err);
+    });
+}

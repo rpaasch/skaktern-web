@@ -85,19 +85,11 @@
             </fieldset>
 
             <button type="submit">Opdater</button>
+            <button id="copyLinkButton">Kopier aktuelt link</button>
+            <button id="reloadButton">Nulstil</button>
         </form>
     </div>
     <div id="chessboard-container"></div>
     <script src="script.js"></script>
-    <script>
-        // JavaScript for at håndtere submit begivenheden
-        document.getElementById('controlForm').addEventListener('submit', function(event) {
-            // Forebyg formens standard handling
-            event.preventDefault();
-            
-            // Kald din updateSettings funktion
-            updateSettings();
-        });
-    </script>
 </body>
 </html>

@@ -89,4 +89,24 @@ body, html {
     background-color: #007bff; /* En baggrundsfarve for knappen */
     color: white; /* Tekstfarve for knappen */
     border: none; /* Fjerner border */
-    cursor: pointer; /* Gør musemarkøren til en pointer
+    cursor: pointer; /* Gør musemarkøren til en pointer */
+    margin-right: 15px; /* Tilføjer margin til højre for knappen */
+}
+
+/* Tilføj dette for at sikre, at den sidste knap ikke har en margin til højre */
+.menu button:last-child {
+    margin-right: 0;
+}
+
+
+/* Tilføjelse af fokus-stil */
+input:focus, select:focus, button:focus {
+    outline: none; /* Fjerner standard browser outline */
+    border: 2px solid orange; /* Tilføjer en orange kant */
+    box-shadow: 0 0 3px orange; /* Tilføjer en skygge for at gøre det mere fremtrædende */
+}
+
+input[type="checkbox"]:focus {
+    outline: none !important; /* Fjerner standard browser outline */
+    box-shadow: 0 0 3px orange !important; /* Tilføjer en skygge for at gøre det mere fremtrædende */
+}
