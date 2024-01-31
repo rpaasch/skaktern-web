@@ -208,6 +208,21 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = urlWithoutParams; // Sætter URL'en til versionen uden parametre og genindlæser siden
     });
 
+    // Off Canvas hjælp
+    const helpButton = document.getElementById('helpButton');
+    const offCanvasWindow = document.getElementById('offCanvasWindow');
+    const closeButton = document.getElementById('closeButton');
+
+    // Åbn off-canvas vinduet
+    helpButton.addEventListener('click', function() {
+        offCanvasWindow.classList.add('open');
+    });
+
+    // Luk off-canvas vinduet
+    closeButton.addEventListener('click', function() {
+        offCanvasWindow.classList.remove('open');
+    });
+
     // Funktion til at opdatere URL med indstillinger som query-parametre
     function updateURL() {
         var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?';

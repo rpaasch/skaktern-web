@@ -110,3 +110,51 @@ input[type="checkbox"]:focus {
     outline: none !important; /* Fjerner standard browser outline */
     box-shadow: 0 0 3px orange !important; /* Tilføjer en skygge for at gøre det mere fremtrædende */
 }
+
+/* Off-canvas vindue style */
+.off-canvas {
+    position: fixed; /* Fast position så det er på samme sted uanset scrolling */
+    top: 0; /* Starter fra toppen af siden */
+    right: -500px; /* Start uden for skærmen til højre */
+    width: 100%; /* Bredden af off-canvas vinduet */
+    max-width: 500px; /* Maksimumsbredde */
+    min-width: 500px; /* Minimumsbredde */
+    height: 100%; /* Fuld højde */
+    background-color: #f8f8f8; /* Baggrundsfarve */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Skygge til venstre for vinduet */
+    transition: right 0.3s; /* Animation for at glide ind og ud */
+    z-index: 1000; /* Sørg for at den er over andre elementer */
+}
+
+.off-canvas-content {
+    padding: 20px; /* Polstring inden i off-canvas vinduet */
+}
+
+.off-canvas-content button {
+    font-size: 24px; /* Størrelse på lukke-knappen */
+    line-height: 1; /* Linjehøjde for at centrere symbolet vertikalt */
+    width: 30px; /* Bredde på knappen */
+    height: 30px; /* Højde på knappen */
+    border: none; /* Ingen kant */
+    background: none; /* Ingen baggrund */
+    cursor: pointer; /* Cursor som en pointer */
+}
+
+/* Style når off-canvas vinduet er åbent */
+.off-canvas.open {
+    right: 0; /* Flyt ind i skærmen */
+}
+
+/* Style til skærme med en bredde på mindre end 500px */
+@media (max-width: 500px) {
+    .off-canvas {
+        min-width: 100%; /* Off-canvas vinduet tager hele skærmens bredde */
+        max-width: 100%; /* Off-canvas vinduet tager hele skærmens bredde */
+        right: -100%; /* Juster så det er helt udenfor skærmen */
+    }
+
+    .off-canvas.open {
+        right: 0; /* Flyt ind i skærmen */
+    }
+}
+
