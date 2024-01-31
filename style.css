@@ -157,3 +157,21 @@ input[type="checkbox"]:focus {
     }
 }
 
+/* Style for logoet */
+#menuLogo {
+    flex-grow: 0; /* Forhindrer logoet i at vokse */
+    flex-shrink: 0; /* Forhindrer logoet i at skrumpe */
+    flex-basis: auto; /* Baser størrelsen på indholdet eller specifik størrelse */
+    height: 40px; /* Juster efter ønsket størrelse */
+    width: auto; /* Bevarer billedets aspekt ratio */
+    padding-right: 2rem;
+    
+}
+
+/* Sørg for, at logoet ikke trykker andre elementer ud af skærmen */
+@media (max-width: 768px) {
+    #menuLogo {
+        height: 30px; /* Mindre størrelse på mindre skærme */
+        padding-bottom: 2rem;
+    }
+}
