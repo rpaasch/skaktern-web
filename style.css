@@ -9,7 +9,7 @@ body, html {
 }
 
 #controls {
-    background-color: #f8f8f8;
+    background-color: #ffffff;
     padding: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     z-index: 1; /* Sikrer at kontrolpanelet er over skakbrættet */
@@ -57,8 +57,7 @@ body, html {
     justify-content: start; /* Starter elementerne fra venstre */
     flex-wrap: wrap; /* Tillader elementerne at gå til næste linje, hvis de ikke passer */
     padding: 10px; /* Lidt polstring omkring elementerne */
-    background-color: #f4f4f4; /* En baggrundsfarve (kan ændres) */
-    border-bottom: 1px solid #ccc; /* En tynd grænse i bunden for at adskille menuen */
+    background-color: #ffffff; /* En baggrundsfarve (kan ændres) */
 }
 
 .menu fieldset {
