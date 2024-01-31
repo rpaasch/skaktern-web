@@ -165,7 +165,6 @@ input[type="checkbox"]:focus {
     height: 40px; /* Juster efter ønsket størrelse */
     width: auto; /* Bevarer billedets aspekt ratio */
     padding-right: 2rem;
-    
 }
 
 /* Sørg for, at logoet ikke trykker andre elementer ud af skærmen */
