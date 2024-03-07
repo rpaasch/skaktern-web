@@ -9,98 +9,205 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="controls">
-        <form id="controlForm" class="menu">
-            <img src="https://ibos.dk/wp-content/uploads/2021/05/cropped-IBOS-logo-PNG-format.png" alt="Logo" id="menuLogo">
-            <fieldset>
-                <legend>Generelle indstillinger</legend>
-                <label for="squareSize">Ternstørrelse:</label>
-                <input type="number" id="squareSize" value="10" min="5" step="5">
-                <label for="interval">Farveinterval (ms):</label>
-                <input type="number" id="interval" value="500">
-                <label for="redSquareSizeMultiplier">Størrelse røde tern</label>
-                <select id="redSquareSizeMultiplier">
-                    <option value="1">1x</option>
-                    <option value="2">2x</option>
-                    <option value="3">3x</option>
-                </select>
-            </fieldset>
 
-            <fieldset>
-                <legend>Kanter</legend>
-                <label for="topRed">Top:</label>
-                <select id="topRed">
-                    <option value="0">Ingen</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <label for="rightRed">Højre:</label>
-                <select id="rightRed">
-                    <option value="0">Ingen</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <label for="bottomRed">Bund:</label>
-                <select id="bottomRed">
-                    <option value="0">Ingen</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <label for="leftRed">Venstre:</label>
-                <select id="leftRed">
-                    <option value="0">Ingen</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <label for="redSquareOffset">Offset Kanter</label>
-                <select id="redSquareOffset">
-                    <option value="0">0</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                    <option value="60">60</option>
-                    <option value="70">70</option>
-                    <option value="80">80</option>
-                </select>
-            </fieldset>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Advarsel: Blinkende lys</h2>
+          <p class="modal-text">Dette websted indeholder blinkende lys, som kan forårsage ubehag eller anfald hos personer med fotosensitivitet.</p>
+          <p class="warning-text">Vær opmærksom på din egen sikkerhed og undgå at se på skærmen, hvis du oplever ubehag.</p>
+          <p>Klik hvor som helst uden for dette vindue for at fortsætte.</p>
+        </div>
+      </div>
 
-            <fieldset>
-                <legend>Hjørner</legend>
-                
-                <label for="topLeftCorner">Top venstre</label>
-                <input type="checkbox" id="topLeftCorner">
-                <label for="topRightCorner">Top højre</label>
-                <input type="checkbox" id="topRightCorner">
-                <label for="bottomLeftCorner">Bund venstre</label>
-                <input type="checkbox" id="bottomLeftCorner">
-                <label for="bottomRightCorner">Bund højre</label>
-                <input type="checkbox" id="bottomRightCorner">
-                <label for="cornerSquareOffset">Offset Hjørner</label>
-                <input type="number" id="cornerSquareOffset" value="0" min="0">
-            </fieldset>
+    <div class="main-container">
+        <div id="leftColumn" class="left-column">
+            <button id="menuToggle" class="menu-toggle"></button>
+        </div>
+        <div id="offCanvasMenu" class="off-canvas-menu">
+            <button id="closeMenuToggle" class="menu-toggle close-toggle"></button>
+            <div id="controls">
+                <form id="controlForm" class="menu">
+                    <img src="https://ibos.dk/wp-content/uploads/2021/05/cropped-IBOS-logo-PNG-format.png" alt="Logo" class="menu-logo">
+                    <fieldset>
+                        <div class="legend-help-wrapper">
+                            <legend>Generelle indstillinger</legend>
+                            <span class="help-icon" data-help="generelleIndstillinger">?</span>
+                        </div>
+                            <div class="help-text" id="help-generelleIndstillinger"></div>
+                    
+                        <div class="form-group">
+                            <label for="squareSize">Ternstørrelse</label>
+                            <input type="number" id="squareSize" value="10" min="5" step="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="interval">Tidsinterval</label>
+                            <input type="number" id="interval" value="500">
+                        </div>
+                        <div class="form-group">
+                            <label for="redSquareSizeMultiplier">Faktor</label>
+                            <select id="redSquareSizeMultiplier">
+                                <option value="1">1x</option>
+                                <option value="2">2x</option>
+                                <option value="3">3x</option>
+                                <option value="4">4x</option>
+                                <option value="5">5x</option>
+                            </select>
+                        </div>
+                    </fieldset>
 
-            <button type="submit">Opdater</button>
-            <button id="copyLinkButton">Kopier aktuelt link</button>
-            <button id="reloadButton">Nulstil</button>
-            <button id="helpButton">Hjælp</button>
-            
-        </form>
-    </div>
-        <div id="offCanvasWindow" class="off-canvas">
-            <!-- Indhold i off-canvas vinduet -->
-            <div class="off-canvas-content">
-                <button id="closeButton">&times;</button>
-                <p>Dette er en hjælpetekst, der giver information til brugeren.</p>
-                <!-- Yderligere hjælpetekst eller indhold kan gå her -->
+                    <fieldset>
+
+
+                        <div class="legend-help-wrapper">
+                            <legend>Kanter</legend>
+                            <span class="help-icon" data-help="kanter">?</span>
+                        </div>
+                            <div class="help-text" id="help-kanter"></div>
+
+                        
+                        <div class="edge-controls">
+                            <div class="form-group edge-control top-control">
+                                <label for="topRed">Top</label>
+                                <div class="edge-input">
+                                    <select id="topRed">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="horizontal-controls">
+                                <div class="form-group edge-control left-control">
+                                    <label for="leftRed">Venstre</label>
+                                    <div class="edge-input">
+                                        <select id="leftRed">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group edge-control right-control">
+                                    <label for="rightRed">Højre</label>
+                                    <div class="edge-input">
+                                        <select id="rightRed">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group edge-control bottom-control">
+                                <label for="bottomRed">Bund</label>
+                                <div class="edge-input">
+                                    <select id="bottomRed">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="redSquareOffset">Afstand fra kanter</label>
+                            <select id="redSquareOffset">
+                                <option value="0">0</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                                <option value="60">60</option>
+                                <option value="70">70</option>
+                                <option value="80">80</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+
+                        <div class="legend-help-wrapper">
+                            <legend>Hjørner</legend>
+                            <span class="help-icon" data-help="hjorner">?</span>
+                        </div>
+                            <div class="help-text" id="help-hjorner"></div>
+
+
+                        
+                        <div class="corner-control">
+                            <div class="form-group corner topLeftCorner">
+                                <label for="topLeftCorner">Top venstre</label>
+                                <input type="checkbox" id="topLeftCorner">
+                            </div>
+                            <div class="form-group spacer"></div>
+                            <div class="form-group corner topRightCorner">
+                                <label for="topRightCorner">Top højre</label>
+                                <input type="checkbox" id="topRightCorner">
+                            </div>
+                            <div class="form-group spacer"></div>
+                            <div class="form-group centerSquare">
+                                <label for="centerSquare">Vis center firkant:</label>
+                                <input type="checkbox" id="centerSquare">
+                            </div>
+                            <div class="form-group spacer"></div>
+                            <div class="form-group corner bottomLeftCorner">
+                                <label for="bottomLeftCorner">Bund venstre</label>
+                                <input type="checkbox" id="bottomLeftCorner">
+                            </div>
+                            <div class="form-group spacer"></div>
+                            <div class="form-group corner bottomRightCorner">
+                                <label for="bottomRightCorner">Bund højre</label>
+                                <input type="checkbox" id="bottomRightCorner">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cornerSquareOffset">Afstand fra jørner</label>
+                            <input type="number" id="cornerSquareOffset" value="0" min="0">
+                        </div>
+                    </fieldset>
+
+                    <button type="submit">Opdater</button>
+                    <button id="copyLinkButton">Kopier aktuelt link</button>
+                    <button id="reloadButton">Nulstil</button>
+                </form>
             </div>
         </div>
-    <div id="chessboard-container"></div>
+        <div id="chessboard-container"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

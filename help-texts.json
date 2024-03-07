@@ -1,0 +1,17 @@
+{
+    "generelleIndstillinger": "*Ternstørrelse* justérer størrelsen på hvert enkelt tern. *Tidsinterval* i sættes i millisekunder og bestemmer tiden for farveskift mellem sort og hvid. *Faktor* angiver størrelsen på de røde tern i forhold til de normale tern.",
+    "kanter": "Kanter",
+    "hjorner": "Hjørner og centrum",
+    "redSquareSizeMultiplier": "Vælg størrelsen på de røde tern i forhold til de normale tern.",
+    "topRed": "Vælg antallet af røde tern langs toppen af brættet.",
+    "rightRed": "Vælg antallet af røde tern langs højre side af brættet.",
+    "bottomRed": "Vælg antallet af røde tern langs bunden af brættet.",
+    "leftRed": "Vælg antallet af røde tern langs venstre side af brættet.",
+    "redSquareOffset": "Juster afstanden af de røde tern fra kanten.",
+    "topLeftCorner": "Vis eller skjul det røde tern i øverste venstre hjørne.",
+    "topRightCorner": "Vis eller skjul det røde tern i øverste højre hjørne.",
+    "bottomLeftCorner": "Vis eller skjul det røde tern i nederste venstre hjørne.",
+    "bottomRightCorner": "Vis eller skjul det røde tern i nederste højre hjørne.",
+    "cornerSquareOffset": "Juster afstanden af hjørnefirkanterne fra hjørnet.",
+    "centerSquare": "Vis eller skjul den røde firkant i centrum af brættet."
+  }
