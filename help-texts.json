@@ -1,5 +1,5 @@
 {
-    "generelleIndstillinger": "*Ternstørrelse* justérer størrelsen på hvert enkelt tern. *Tidsinterval* i sættes i millisekunder og bestemmer tiden for farveskift mellem sort og hvid. *Faktor* angiver størrelsen på de røde tern i forhold til de normale tern.",
+    "generelleIndstillinger": "*Ternstørrelse* justérer størrelsen på hvert enkelt tern. *Tidsinterval* i sættes i millisekunder og bestemmer tiden for farveskift mellem sort og hvid. *Røde tern - forstørrelsesfaktor* angiver størrelsen på de røde tern i forhold til de normale tern.",
     "kanter": "Kanter",
     "hjorner": "Hjørner og centrum",
     "redSquareSizeMultiplier": "Vælg størrelsen på de røde tern i forhold til de normale tern.",
