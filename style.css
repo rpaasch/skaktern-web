@@ -21,6 +21,7 @@ body, html {
     justify-content: center;
     padding-top: 10px;
     transition: opacity 0.3s;
+    z-index: 999;
 }
 
 .left-column.hidden {
@@ -30,12 +31,13 @@ body, html {
 
 .off-canvas-menu {
     width: 40vw;
+    min-width: 300px;
     height: 100%;
     box-sizing: border-box;
     overflow-y: auto;
     position: fixed;
     top: 0;
-    left: -40vw;
+    left: -100vw;
     transition: left 0.3s;
     z-index: 1000;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -85,6 +87,7 @@ body, html {
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1002;
 }
 
 .close-toggle::before {
@@ -115,6 +118,7 @@ body, html {
     bottom: 0;
     left: 20px;
     width: calc(40vw - 40px);
+    min-width: calc(300px - 40px);
     background-color: #ffffff;
     padding: 10px;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
@@ -519,10 +523,12 @@ body, html {
 @media (max-width: 768px) {
     .off-canvas-menu {
         width: 100%;
+        min-width: 100%;
     }
     
     .fixed-buttons {
         width: calc(100% - 40px);
+        min-width: auto;
         left: 20px;
     }
     
