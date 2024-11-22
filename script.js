@@ -4,20 +4,24 @@ const closeMenuToggle = document.getElementById('closeMenuToggle');
 const offCanvasMenu = document.getElementById('offCanvasMenu');
 const chessboardContainer = document.getElementById('chessboard-container');
 const leftColumn = document.getElementById('leftColumn');
+const reloadButton = document.getElementById('reloadButton');
+const confirmDialog = document.getElementById('confirmDialog');
+const confirmYes = document.getElementById('confirmYes');
+const confirmNo = document.getElementById('confirmNo');
 
 menuToggle.addEventListener('click', function() {
     offCanvasMenu.classList.add('open');
     chessboardContainer.classList.add('open');
-    leftColumn.style.display = 'none'; // Hide the left column
+    leftColumn.style.display = 'none';
 });
 
 function closeMenu() {
     offCanvasMenu.classList.remove('open');
     chessboardContainer.classList.remove('open');
-    leftColumn.style.display = 'flex'; // Show the left column
+    leftColumn.style.display = 'flex';
     setTimeout(function() {
-        adjustCanvasSize(); // Adjust the canvas size
-    }, 300); // Wait for the transition to complete (adjust the duration as needed)
+        adjustCanvasSize();
+    }, 300);
 }
 
 closeMenuToggle.addEventListener('click', closeMenu);
@@ -35,14 +39,14 @@ chessboardContainer.addEventListener('click', closeMenu);
 // Variabler for skakbræt-tilstand
 let isBlack = true;
 let lastTimeSwitched = 0;
-let interval = 500; // Farveskift interval i millisekunder
+let interval = 500;
 
 // Variabler for skakbræt-udseende
-let squareSize = 10; // Størrelse af hvert skaktern
+let squareSize = 10;
 let redSquares = { top: 0, right: 0, bottom: 0, left: 0 };
-let redSquareOffset = 10; // Offset mod centrum
-let redSquareSizeMultiplier = 1; // Størrelsesmultiplikator
-let cornerSquareOffset = 10; // Offset for hjørnefirkanter
+let redSquareOffset = 10;
+let redSquareSizeMultiplier = 1;
+let cornerSquareOffset = 10;
 
 // Status for hjørnefirkanter
 let topLeftCorner = false;
@@ -53,9 +57,37 @@ let bottomRightCorner = false;
 // Status for center firkant
 let centerSquare = false;
 
+// p5.js setup function - called once when the script starts
+function setup() {
+    let chessboardContainer = document.getElementById('chessboard-container');
+    let canvas = createCanvas(chessboardContainer.offsetWidth, chessboardContainer.offsetHeight);
+    canvas.parent('chessboard-container');
+    noSmooth();
+    frameRate(60);
+    
+    // Initialize settings
+    updateSettingsFromURL();
+    updateGUI();
+}
+
+// Nulstil bekræftelsesdialog
+reloadButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    confirmDialog.style.display = 'block';
+});
+
+confirmYes.addEventListener('click', function() {
+    const urlWithoutParams = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.location.href = urlWithoutParams;
+});
+
+confirmNo.addEventListener('click', function() {
+    confirmDialog.style.display = 'none';
+});
+
 // p5.js draw function - called continuously to render the chessboard
 function draw() {
-    background(255); // Clear the background
+    background(255);
 
     if (millis() - lastTimeSwitched > interval) {
         isBlack = !isBlack;
@@ -125,7 +157,7 @@ function calculateRedSquarePositions(count, side) {
     return positions;
 }
 
-// Funktion til at tegne firkanter i hjørnerne, hvis de er aktiverede
+// Funktion til at tegne firkanter i hjørnerne
 function drawCornerSquares() {
     if (topLeftCorner) {
         fill(255, 0, 0);
@@ -145,7 +177,7 @@ function drawCornerSquares() {
     }
 }
 
-// Funktion til at tegne en firkant i centrum, hvis den er aktiveret
+// Funktion til at tegne en firkant i centrum
 function drawCenterSquare() {
     if (centerSquare) {
         fill(255, 0, 0);
@@ -168,7 +200,6 @@ function windowResized() {
 function updateSettingsFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Hent værdier fra URL-parametre, eller brug eksisterende værdier som fallback
     squareSize = parseInt(urlParams.get('squareSize')) || squareSize;
     interval = parseInt(urlParams.get('interval')) || interval;
     redSquares.top = parseInt(urlParams.get('topRed')) || redSquares.top;
@@ -185,9 +216,8 @@ function updateSettingsFromURL() {
     centerSquare = urlParams.get('centerSquare') === 'true' || centerSquare;
 }
 
-// Funktion til at opdatere indstillingerne baseret på brugerens input
+// Funktion til at opdatere indstillingerne
 function updateSettings() {
-    // Opdater værdierne baseret på input-elementer
     const squareSizeInput = document.getElementById('squareSize');
     const intervalInput = document.getElementById('interval');
     const topRedInput = document.getElementById('topRed');
@@ -203,7 +233,6 @@ function updateSettings() {
     const bottomRightCornerInput = document.getElementById('bottomRightCorner');
     const centerSquareInput = document.getElementById('centerSquare');
 
-    // Update the values only if the elements exist
     if (squareSizeInput) squareSize = parseInt(squareSizeInput.value);
     if (intervalInput) interval = parseInt(intervalInput.value);
     if (topRedInput) redSquares.top = parseInt(topRedInput.value);
@@ -219,91 +248,24 @@ function updateSettings() {
     if (bottomRightCornerInput) bottomRightCorner = bottomRightCornerInput.checked;
     if (centerSquareInput) centerSquare = centerSquareInput.checked;
 
-    adjustCanvasSize(); // Juster lærredets størrelse
-    draw(); // Tegn skakbrættet igen for at vise ændringerne
+    adjustCanvasSize();
+    draw();
 }
 
-// Funktion til at opdatere GUI med de aktuelle indstillinger
-function updateGUI() {
-    document.getElementById('squareSize').value = squareSize;
-    document.getElementById('interval').value = interval;
-    document.getElementById('topRed').value = redSquares.top;
-    document.getElementById('rightRed').value = redSquares.right;
-    document.getElementById('bottomRed').value = redSquares.bottom;
-    document.getElementById('leftRed').value = redSquares.left;
-    document.getElementById('redSquareOffset').value = redSquareOffset;
-    document.getElementById('redSquareSizeMultiplier').value = redSquareSizeMultiplier;
-    document.getElementById('cornerSquareOffset').value = cornerSquareOffset;
-    document.getElementById('topLeftCorner').checked = topLeftCorner;
-    document.getElementById('topRightCorner').checked = topRightCorner;
-    document.getElementById('bottomLeftCorner').checked = bottomLeftCorner;
-    document.getElementById('bottomRightCorner').checked = bottomRightCorner;
-    document.getElementById('centerSquare').checked = centerSquare;
-}
-
-// p5.js setup funktion - kaldes én gang, når scriptet startes
-function setup() {
-    console.log("setup funktionen kører");
-    let chessboardContainer = document.getElementById('chessboard-container');
-    console.log("chessboardContainer dimensioner:", chessboardContainer.offsetWidth, chessboardContainer.offsetHeight);
-    let canvas = createCanvas(chessboardContainer.offsetWidth, chessboardContainer.offsetHeight);
-    console.log("Canvas størrelse:", canvas.width, canvas.height);
-    canvas.parent('chessboard-container');
-    noSmooth();
-    frameRate(60);
-
-    updateSettingsFromURL(); // Opdater indstillinger baseret på URL-parametre
-    updateGUI(); // Opdater indstillinger i brugergrænsefladen
-    updateSettings(); // Opdater indstillinger ved start
-}
-
-
-    // Event Listener for submit-begivenhed på form
-    document.getElementById('controlForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Forebyg formens standard handling
-        updateSettings(); // Opdater indstillinger baseret på form input
-        updateURL(); // Opdater URL'en med de nye indstillinger
-    });
-
-    // Tilføj event listener for 'Kopier link' knappen
-    document.getElementById('copyLinkButton').addEventListener('click', function() {
-        copyCurrentLink(); // Funktion til at kopiere link
-    });
-
-    // Funktion til at bestemme om modalvinduet skal vises
-function shouldShowModal() {
-    // Returner altid falsk for nu
-    return false;
-}
-
-// Tilføj event listener for 'Nulstil' knappen
-document.getElementById('reloadButton').addEventListener('click', function() {
-    const urlWithoutParams = window.location.protocol + "//" + window.location.host + window.location.pathname;
-    
-    // Kontroller om modalvinduet skal vises
-    if (shouldShowModal()) {
-        // Vis modalvinduet
-        showModal();
-    } else {
-        // Nulstil uden at vise modalvinduet
-        window.location.href = urlWithoutParams; // Sætter URL'en til versionen uden parametre og genindlæser siden
-    }
+// Event Listener for submit-begivenhed på form
+document.getElementById('controlForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    updateSettings();
+    updateURL();
+    closeMenu(); // Luk menuen efter opdatering
 });
 
-// Funktion til at vise modalvinduet
-function showModal() {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'block';
-}
+// Kopier link knap
+document.getElementById('copyLinkButton').addEventListener('click', function() {
+    copyCurrentLink();
+});
 
-
-// Funktion til at vise modalvinduet
-function showModal() {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'block';
-}
-
-    // Funktion til at opdatere URL med indstillinger som query-parametre
+// Funktion til at opdatere URL
 function updateURL() {
     var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?';
     newUrl += 'squareSize=' + encodeURIComponent(squareSize) + '&';
@@ -321,9 +283,10 @@ function updateURL() {
     newUrl += 'centerSquare=' + centerSquare + '&';
     newUrl += 'cornerSquareOffset=' + encodeURIComponent(cornerSquareOffset);
 
-    window.history.pushState({ path: newUrl }, '', newUrl); // Opdater URL'en uden at genindlæse siden
+    window.history.pushState({ path: newUrl }, '', newUrl);
 }
 
+// Funktion til at opdatere GUI
 function updateGUI() {
     document.getElementById('squareSize').value = squareSize;
     document.getElementById('interval').value = interval;
@@ -341,10 +304,6 @@ function updateGUI() {
     document.getElementById('centerSquare').checked = centerSquare;
 }
 
-// Funktioner til initialisering
-updateSettingsFromURL();
-updateGUI();
-
 // Funktion til at kopiere det aktuelle link
 function copyCurrentLink() {
     const url = window.location.href;
@@ -355,56 +314,51 @@ function copyCurrentLink() {
     });
 }
 
-
-
-  // Load help texts from JSON file
+// Load help texts from JSON file
 fetch('help-texts.json')
 .then(response => response.json())
 .then(helpTexts => {
-  // Add event listeners to help icons
-  const helpIcons = document.querySelectorAll('.help-icon');
-  helpIcons.forEach(icon => {
-    const controlId = icon.dataset.help;
-    const helpText = helpTexts[controlId];
+    const helpIcons = document.querySelectorAll('.help-icon');
+    helpIcons.forEach(icon => {
+        const controlId = icon.dataset.help;
+        const helpText = helpTexts[controlId];
 
-    icon.addEventListener('click', () => {
-      const helpTextElement = document.getElementById(`help-${controlId}`);
-      helpTextElement.textContent = helpText;
-      helpTextElement.classList.toggle('visible');
+        icon.addEventListener('click', () => {
+            const helpTextElement = document.getElementById(`help-${controlId}`);
+            helpTextElement.textContent = helpText;
+            helpTextElement.classList.toggle('visible');
+        });
     });
-  });
 })
 .catch(error => {
-  console.error('Error loading help texts:', error);
+    console.error('Error loading help texts:', error);
 });
 
 // Update edge values
 const edgeInputs = document.querySelectorAll('.edge-input select');
 edgeInputs.forEach(input => {
-  input.addEventListener('change', () => {
-    updateSettings();
-  });
+    input.addEventListener('change', () => {
+        updateSettings();
+    });
 });
 
-
-
-// Find modalvinduet og lukkeknappen
+// Modal functionality
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 
-// Når brugeren klikker uden for modalvinduet, lukker det
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    if (event.target == confirmDialog) {
+        confirmDialog.style.display = "none";
+    }
 }
 
-// Når brugeren klikker på lukkeknappen, lukker det også
 span.onclick = function() {
-  modal.style.display = "none";
+    modal.style.display = "none";
 }
 
-// Vis modalvinduet ved indlæsning af siden
 window.onload = function() {
-  modal.style.display = "block";
+    modal.style.display = "block";
 }

@@ -1,17 +1,5 @@
 {
-    "generelleIndstillinger": "*Ternstørrelse* justérer størrelsen på hvert enkelt tern. *Tidsinterval* i sættes i millisekunder og bestemmer tiden for farveskift mellem sort og hvid. *Røde tern - forstørrelsesfaktor* angiver størrelsen på de røde tern i forhold til de normale tern.",
-    "kanter": "Kanter",
-    "hjorner": "Hjørner og centrum",
-    "redSquareSizeMultiplier": "Vælg størrelsen på de røde tern i forhold til de normale tern.",
-    "topRed": "Vælg antallet af røde tern langs toppen af brættet.",
-    "rightRed": "Vælg antallet af røde tern langs højre side af brættet.",
-    "bottomRed": "Vælg antallet af røde tern langs bunden af brættet.",
-    "leftRed": "Vælg antallet af røde tern langs venstre side af brættet.",
-    "redSquareOffset": "Juster afstanden af de røde tern fra kanten.",
-    "topLeftCorner": "Vis eller skjul det røde tern i øverste venstre hjørne.",
-    "topRightCorner": "Vis eller skjul det røde tern i øverste højre hjørne.",
-    "bottomLeftCorner": "Vis eller skjul det røde tern i nederste venstre hjørne.",
-    "bottomRightCorner": "Vis eller skjul det røde tern i nederste højre hjørne.",
-    "cornerSquareOffset": "Juster afstanden af hjørnefirkanterne fra hjørnet.",
-    "centerSquare": "Vis eller skjul den røde firkant i centrum af brættet."
-  }
+    "generelleIndstillinger": "Her kan du justere de grundlæggende indstillinger for skakbrættet:\n- Ternstørrelse: Bestemmer størrelsen af hvert enkelt felt i pixels\n- Tidsinterval: Hvor hurtigt mønstret skifter i millisekunder\n- Røde tern - forstørrelsesfaktor: Hvor meget større de røde tern skal være i forhold til de normale tern",
+    "kanter": "Her kan du tilføje røde tern langs skakbrættets kanter:\n- Vælg antal tern for hver kant (0-10)\n- Juster afstanden fra kanten med 'Afstand fra kanter'",
+    "hjorner": "Her kan du tilføje røde tern i hjørnerne og centrum af skakbrættet:\n- Marker de hjørner hvor du ønsker røde tern\n- Tilføj en rød tern i centrum ved at markere 'Center'\n- Juster afstanden fra hjørnerne med 'Afstand fra hjørner'"
+}
