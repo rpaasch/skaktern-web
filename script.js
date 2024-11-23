@@ -40,6 +40,7 @@ chessboardContainer.addEventListener('click', closeMenu);
 let isBlack = true;
 let lastTimeSwitched = 0;
 let interval = 500;
+let isAnimationPaused = true; // Start med pauseret animation
 
 // Variabler for skakbræt-udseende
 let squareSize = 10;
@@ -89,7 +90,7 @@ confirmNo.addEventListener('click', function() {
 function draw() {
     background(255);
 
-    if (millis() - lastTimeSwitched > interval) {
+    if (!isAnimationPaused && millis() - lastTimeSwitched > interval) {
         isBlack = !isBlack;
         lastTimeSwitched = millis();
     }
@@ -334,13 +335,21 @@ fetch('help-texts.json')
     console.error('Error loading help texts:', error);
 });
 
-// Update edge values
+// Update edge values and offset inputs
 const edgeInputs = document.querySelectorAll('.edge-input select');
 edgeInputs.forEach(input => {
     input.addEventListener('change', () => {
         updateSettings();
     });
 });
+
+// Tilføj event listener til redSquareOffset input
+const redSquareOffsetInput = document.getElementById('redSquareOffset');
+if (redSquareOffsetInput) {
+    redSquareOffsetInput.addEventListener('input', () => {
+        updateSettings();
+    });
+}
 
 // Modal functionality
 var modal = document.getElementById("myModal");
@@ -349,6 +358,7 @@ var span = document.getElementsByClassName("close")[0];
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        isAnimationPaused = false; // Start animationen når modal lukkes
     }
     if (event.target == confirmDialog) {
         confirmDialog.style.display = "none";
@@ -357,8 +367,10 @@ window.onclick = function(event) {
 
 span.onclick = function() {
     modal.style.display = "none";
+    isAnimationPaused = false; // Start animationen når modal lukkes
 }
 
 window.onload = function() {
     modal.style.display = "block";
+    // Animation er allerede pauseret fra start (isAnimationPaused = true)
 }
