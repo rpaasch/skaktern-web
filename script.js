@@ -45,9 +45,9 @@ let isAnimationPaused = true; // Start med pauseret animation
 // Variabler for skakbræt-udseende
 let squareSize = 10;
 let redSquares = { top: 0, right: 0, bottom: 0, left: 0 };
-let redSquareOffset = 10;
+let redSquareOffset = 60; // Ændret standardværdi til 60
 let redSquareSizeMultiplier = 1;
-let cornerSquareOffset = 10;
+let cornerSquareOffset = 60; // Ændret standardværdi til 60
 
 // Status for hjørnefirkanter
 let topLeftCorner = false;
@@ -343,10 +343,18 @@ edgeInputs.forEach(input => {
     });
 });
 
-// Tilføj event listener til redSquareOffset input
+// Tilføj event listeners til offset inputs
 const redSquareOffsetInput = document.getElementById('redSquareOffset');
+const cornerSquareOffsetInput = document.getElementById('cornerSquareOffset');
+
 if (redSquareOffsetInput) {
-    redSquareOffsetInput.addEventListener('input', () => {
+    redSquareOffsetInput.addEventListener('change', () => {
+        updateSettings();
+    });
+}
+
+if (cornerSquareOffsetInput) {
+    cornerSquareOffsetInput.addEventListener('change', () => {
         updateSettings();
     });
 }
