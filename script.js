@@ -45,9 +45,9 @@ let isAnimationPaused = true; // Start med pauseret animation
 // Variabler for skakbræt-udseende
 let squareSize = 10;
 let redSquares = { top: 0, right: 0, bottom: 0, left: 0 };
-let redSquareOffset = 60; // Ændret standardværdi til 60
+let redSquareOffset = 60;
 let redSquareSizeMultiplier = 1;
-let cornerSquareOffset = 60; // Ændret standardværdi til 60
+let cornerSquareOffset = 60;
 
 // Status for hjørnefirkanter
 let topLeftCorner = false;
@@ -69,6 +69,7 @@ function setup() {
     // Initialize settings
     updateSettingsFromURL();
     updateGUI();
+    setupEventListeners();
 }
 
 // Nulstil bekræftelsesdialog
@@ -315,48 +316,76 @@ function copyCurrentLink() {
     });
 }
 
-// Load help texts from JSON file
-fetch('help-texts.json')
-.then(response => response.json())
-.then(helpTexts => {
-    const helpIcons = document.querySelectorAll('.help-icon');
-    helpIcons.forEach(icon => {
-        const controlId = icon.dataset.help;
-        const helpText = helpTexts[controlId];
+// Funktion til at opsætte alle event listeners
+function setupEventListeners() {
+    // Event listeners for inputs der skal opdatere ved ændring
+    const updateOnChangeInputs = [
+        'redSquareOffset',
+        'cornerSquareOffset',
+        'redSquareSizeMultiplier'
+    ];
 
-        icon.addEventListener('click', () => {
-            const helpTextElement = document.getElementById(`help-${controlId}`);
-            helpTextElement.textContent = helpText;
-            helpTextElement.classList.toggle('visible');
+    updateOnChangeInputs.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', () => {
+                updateSettings();
+            });
+        }
+    });
+
+    // Event listeners for checkboxes
+    const checkboxIds = [
+        'topLeftCorner',
+        'topRightCorner',
+        'bottomLeftCorner',
+        'bottomRightCorner',
+        'centerSquare'
+    ];
+
+    checkboxIds.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', () => {
+                updateSettings();
+            });
+        }
+    });
+
+    // Event listeners for kant-inputs
+    const edgeInputs = document.querySelectorAll('.edge-input select');
+    edgeInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            updateSettings();
         });
     });
-})
-.catch(error => {
-    console.error('Error loading help texts:', error);
-});
 
-// Update edge values and offset inputs
-const edgeInputs = document.querySelectorAll('.edge-input select');
-edgeInputs.forEach(input => {
-    input.addEventListener('change', () => {
-        updateSettings();
-    });
-});
-
-// Tilføj event listeners til offset inputs
-const redSquareOffsetInput = document.getElementById('redSquareOffset');
-const cornerSquareOffsetInput = document.getElementById('cornerSquareOffset');
-
-if (redSquareOffsetInput) {
-    redSquareOffsetInput.addEventListener('change', () => {
-        updateSettings();
-    });
+    // Setup hjælpetekster
+    setupHelpTexts();
 }
 
-if (cornerSquareOffsetInput) {
-    cornerSquareOffsetInput.addEventListener('change', () => {
-        updateSettings();
-    });
+// Funktion til at opsætte hjælpetekster
+function setupHelpTexts() {
+    fetch('help-texts.json')
+        .then(response => response.json())
+        .then(helpTexts => {
+            const helpIcons = document.querySelectorAll('.help-icon');
+            helpIcons.forEach(icon => {
+                const controlId = icon.dataset.help;
+                const helpText = helpTexts[controlId];
+                const helpTextElement = document.getElementById(`help-${controlId}`);
+                
+                if (helpTextElement) {
+                    icon.addEventListener('click', () => {
+                        helpTextElement.textContent = helpText;
+                        helpTextElement.classList.toggle('visible');
+                    });
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error loading help texts:', error);
+        });
 }
 
 // Modal functionality
