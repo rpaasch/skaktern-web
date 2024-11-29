@@ -1,4 +1,3 @@
-/* Først indsætter jeg de eksisterende styles... */
 body, html {
     margin: 0;
     padding: 0;
@@ -151,11 +150,10 @@ body, html {
     background: #a1a1a1;
 }
 
-/* Opdaterede knap-styles */
 .fixed-buttons {
     position: fixed;
     bottom: 0;
-    left: 20px;
+    left: -100vw;
     width: calc(40vw - 40px);
     min-width: calc(300px - 40px);
     background-color: #ffffff;
@@ -166,11 +164,15 @@ body, html {
     gap: 12px;
     z-index: 1002;
     box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.off-canvas-menu.open .fixed-buttons {
+    left: 20px;
 }
 
 .fixed-buttons button {
-    flex: 1;
-    padding: 14px 10px;
+    padding: 14px 16px;
     font-size: 0.9rem;
     border-radius: 8px;
     border: none;
@@ -178,10 +180,29 @@ body, html {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
     text-transform: uppercase;
-    min-width: 0;
     white-space: nowrap;
     letter-spacing: 0.8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 100px;
+}
+
+.fixed-buttons button[type="submit"] {
+    background-color: #10b981;
+    color: white;
+    background-image: linear-gradient(to bottom right, #10b981, #059669);
+}
+
+#copyLinkButton {
+    min-width: 200px;
+    background-color: #3b82f6;
+    color: white;
+    background-image: linear-gradient(to bottom right, #3b82f6, #2563eb);
+}
+
+#reloadButton {
+    background-color: #ef4444;
+    color: white;
+    background-image: linear-gradient(to bottom right, #ef4444, #dc2626);
 }
 
 .fixed-buttons button:hover {
@@ -194,30 +215,12 @@ body, html {
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.fixed-buttons button[type="submit"] {
-    background-color: #10b981;
-    color: white;
-    background-image: linear-gradient(to bottom right, #10b981, #059669);
-}
-
 .fixed-buttons button[type="submit"]:hover {
     background-image: linear-gradient(to bottom right, #059669, #047857);
 }
 
-#copyLinkButton {
-    background-color: #3b82f6;
-    color: white;
-    background-image: linear-gradient(to bottom right, #3b82f6, #2563eb);
-}
-
 #copyLinkButton:hover {
     background-image: linear-gradient(to bottom right, #2563eb, #1d4ed8);
-}
-
-#reloadButton {
-    background-color: #ef4444;
-    color: white;
-    background-image: linear-gradient(to bottom right, #ef4444, #dc2626);
 }
 
 #reloadButton:hover {
@@ -233,7 +236,6 @@ body, html {
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-/* Edges Fieldset */
 .edges-fieldset {
     padding: 25px !important;
 }
@@ -322,7 +324,6 @@ body, html {
     transform: translateY(-50%);
 }
 
-/* Corners Fieldset */
 .corners-fieldset {
     padding: 25px !important;
 }
@@ -519,7 +520,6 @@ body, html {
     text-decoration: underline;
 }
 
-/* Modal styles */
 .modal {
     display: none;
     position: fixed;
@@ -598,7 +598,6 @@ body, html {
     font-weight: 600;
 }
 
-/* Confirm dialog styles */
 .confirm-dialog {
     display: none;
     position: fixed;
@@ -693,7 +692,7 @@ body, html {
     .fixed-buttons {
         width: calc(100% - 40px);
         min-width: auto;
-        left: 20px;
+        left: -100vw;
     }
     
     #chessboard-container.open {
