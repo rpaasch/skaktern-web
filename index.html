@@ -5,261 +5,334 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBOS - Skaktern</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .landing-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Venstre side - Advarsel */
+        .warning-section {
+            flex: 1;
+            background: linear-gradient(135deg, #1f1f1f 0%, #000000 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .warning-content {
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .warning-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .warning-content h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .warning-content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            opacity: 0.95;
+        }
+
+        .warning-content .emphasis {
+            font-weight: 600;
+            font-size: 17px;
+            margin-top: 16px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 14px 40px;
+            background-color: white;
+            color: #000000;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* Højre side - Information */
+        .info-section {
+            flex: 1;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 40px;
+            overflow-y: auto;
+        }
+
+        .info-content {
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo-container {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .app-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .app-subtitle {
+            font-size: 14px;
+            color: #6b6b6b;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .info-block {
+            margin-bottom: 24px;
+        }
+
+        .info-block h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .info-block p {
+            font-size: 14px;
+            color: #1f1f1f;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .info-block a {
+            color: #007AFF;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .info-block a:hover {
+            color: #0051D5;
+            text-decoration: underline;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: #e8e8e8;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .link-button:hover {
+            background-color: #d5d5d5;
+            transform: translateX(4px);
+        }
+
+        .link-button::after {
+            content: '→';
+            margin-left: auto;
+            font-size: 16px;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #e5e5e5;
+            margin: 20px 0;
+        }
+
+        .copyright {
+            text-align: left;
+            color: #6b6b6b;
+            font-size: 12px;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        /* Responsivt design */
+        @media (max-width: 968px) {
+            .landing-container {
+                flex-direction: column;
+            }
+
+            .warning-section,
+            .info-section {
+                min-height: 50vh;
+            }
+
+            .warning-content h1 {
+                font-size: 28px;
+            }
+
+            .warning-content p {
+                font-size: 16px;
+            }
+
+            .app-title {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .warning-section,
+            .info-section {
+                padding: 40px 24px;
+            }
+
+            .warning-icon {
+                font-size: 60px;
+            }
+
+            .warning-content h1 {
+                font-size: 24px;
+            }
+
+            .cta-button {
+                padding: 16px 36px;
+                font-size: 16px;
+            }
+
+            .app-title {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Advarsel: Blinkende lys</h2>
-            <p class="modal-text">Dette websted indeholder blinkende lys, som kan forårsage ubehag eller anfald hos personer med fotosensitivitet.</p>
-            <p class="warning-text">Vær opmærksom på din egen sikkerhed og undgå at se på skærmen, hvis du oplever ubehag.</p>
-            <p>Klik hvor som helst uden for dette vindue for at fortsætte.</p>
+    <div class="landing-container">
+        <!-- Venstre side - Advarsel -->
+        <div class="warning-section">
+            <div class="warning-content">
+                <div class="warning-icon" aria-hidden="true">⚠️</div>
+                <h1>Advarsel om fotosensitivitet</h1>
+                <p>Dette værktøj bruger blinkende mønstre som kan udløse anfald hos personer med fotosensitivitet eller epilepsi.</p>
+                <p class="emphasis">Undgå brug hvis du er følsom overfor blinkende lys.</p>
+                <a href="app.html" class="cta-button" role="button">Jeg forstår - Fortsæt til værktøj</a>
+            </div>
         </div>
-    </div>
 
-    <div id="confirmDialog" class="confirm-dialog">
-        <div class="confirm-content">
-            <h3>Er du sikker på at du vil nulstille alle indstillinger?</h3>
-            <p>Denne handling kan ikke fortrydes.</p>
-            <div class="confirm-buttons">
-                <button id="confirmNo" class="confirm-no">Annuller</button>
-                <button id="confirmYes" class="confirm-yes">Ja, nulstil</button>
+        <!-- Højre side - Information -->
+        <div class="info-section">
+            <div class="info-content">
+                <div class="logo-container">
+                    <img src="https://ibos.dk/wp-content/uploads/2021/05/cropped-IBOS-logo-PNG-format.png" alt="IBOS Logo" class="logo">
+                </div>
+
+                <h1 class="app-title">IBOS Skaktern</h1>
+                <p class="app-subtitle">Et professionelt værktøj til neurooptometri og synstræning</p>
+
+                <div class="info-block">
+                    <h2>Om værktøjet</h2>
+                    <p>IBOS Skaktern er udviklet til professionelle indenfor neurooptometri. Værktøjet skaber kontrollerede visuelle stimuli med blinkende mønstre til synstræning og diagnostiske formål.</p>
+                    <p><strong>Vigtigt:</strong> Dette værktøj skal kun bruges af fagpersoner med kendskab til fotosensitivitet og visuel stimulation.</p>
+                </div>
+
+                <div class="quick-links">
+                    <a href="manual.html" class="link-button" target="_blank">Faglig vejledning for professionelle</a>
+                    <a href="accessibility.html" class="link-button">Tilgængelighedserklæring</a>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-block">
+                    <h2>Kontakt</h2>
+                    <p><strong>Faglig support:</strong><br>
+                    Neurooptometrist Karsten Haarh<br>
+                    <a href="mailto:G64L@kk.dk">G64L@kk.dk</a></p>
+
+                    <p><strong>Teknisk support:</strong><br>
+                    Rasmus Paasch<br>
+                    <a href="mailto:dx7p@kk.dk">dx7p@kk.dk</a></p>
+                </div>
+
+                <p class="copyright">© 2024-2025 IBOS</p>
             </div>
         </div>
     </div>
-
-    <div class="main-container">
-        <div id="leftColumn" class="left-column">
-            <button id="menuToggle" class="menu-toggle"></button>
-        </div>
-        <div id="offCanvasMenu" class="off-canvas-menu">
-            <button id="closeMenuToggle" class="menu-toggle close-toggle"></button>
-            <div id="controls">
-                <form id="controlForm" class="menu">
-                    <div class="menu-content">
-                        <img src="https://ibos.dk/wp-content/uploads/2021/05/cropped-IBOS-logo-PNG-format.png" alt="Logo" class="menu-logo">
-                        <fieldset>
-                            <div class="legend-help-wrapper">
-                                <legend>Generelle indstillinger</legend>
-                                <span class="help-icon" data-help="generelleIndstillinger">?</span>
-                            </div>
-                            <div class="help-text" id="help-generelleIndstillinger"></div>
-                        
-                            <div class="form-group">
-                                <label for="squareSize">Ternstørrelse</label>
-                                <input type="number" id="squareSize" value="10" min="5" step="5">
-                            </div>
-                            <div class="form-group">
-                                <label for="interval">Tidsinterval</label>
-                                <input type="number" id="interval" value="500">
-                            </div>
-                            <div class="form-group">
-                                <label for="redSquareSizeMultiplier">Røde tern - forstørrelsesfaktor</label>
-                                <select id="redSquareSizeMultiplier">
-                                    <option value="1">1x</option>
-                                    <option value="2">2x</option>
-                                    <option value="3">3x</option>
-                                    <option value="4">4x</option>
-                                    <option value="5">5x</option>
-                                </select>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="edges-fieldset">
-                            <div class="legend-help-wrapper">
-                                <legend>Kanter</legend>
-                                <span class="help-icon" data-help="kanter">?</span>
-                            </div>
-                            <div class="help-text" id="help-kanter"></div>
-                            
-                            <div class="edge-controls">
-                                <div class="edge-visual">
-                                    <div class="edge-border edge-border-top"></div>
-                                    <div class="edge-border edge-border-right"></div>
-                                    <div class="edge-border edge-border-bottom"></div>
-                                    <div class="edge-border edge-border-left"></div>
-                                    
-                                    <div class="edge-input top">
-                                        <label for="topRed">Top</label>
-                                        <select id="topRed">
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="edge-input right">
-                                        <label for="rightRed">Højre</label>
-                                        <select id="rightRed">
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="edge-input bottom">
-                                        <label for="bottomRed">Bund</label>
-                                        <select id="bottomRed">
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="edge-input left">
-                                        <label for="leftRed">Venstre</label>
-                                        <select id="leftRed">
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="redSquareOffset">Afstand fra kanter</label>
-                                    <select id="redSquareOffset">
-                                        <option value="0">0</option>
-                                        <option value="10">10</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
-                                        <option value="40">40</option>
-                                        <option value="50">50</option>
-                                        <option value="60" selected>60</option>
-                                        <option value="70">70</option>
-                                        <option value="80">80</option>
-                                        <option value="90">90</option>
-                                        <option value="100">100</option>
-                                        <option value="110">110</option>
-                                        <option value="120">120</option>
-                                        <option value="130">130</option>
-                                        <option value="140">140</option>
-                                        <option value="150">150</option>
-                                        <option value="160">160</option>
-                                        <option value="170">170</option>
-                                        <option value="180">180</option>
-                                        <option value="190">190</option>
-                                        <option value="200">200</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="corners-fieldset">
-                            <div class="legend-help-wrapper">
-                                <legend>Hjørner</legend>
-                                <span class="help-icon" data-help="hjorner">?</span>
-                            </div>
-                            <div class="help-text" id="help-hjorner"></div>
-
-                            <div class="corner-controls">
-                                <div class="corner-visual">
-                                    <div class="corner-input top-left">
-                                        <input type="checkbox" id="topLeftCorner">
-                                        <label for="topLeftCorner">Top venstre</label>
-                                    </div>
-                                    
-                                    <div class="corner-input top-right">
-                                        <input type="checkbox" id="topRightCorner">
-                                        <label for="topRightCorner">Top højre</label>
-                                    </div>
-                                    
-                                    <div class="center-input">
-                                        <input type="checkbox" id="centerSquare">
-                                        <label for="centerSquare">Center</label>
-                                    </div>
-                                    
-                                    <div class="corner-input bottom-left">
-                                        <input type="checkbox" id="bottomLeftCorner">
-                                        <label for="bottomLeftCorner">Bund venstre</label>
-                                    </div>
-                                    
-                                    <div class="corner-input bottom-right">
-                                        <input type="checkbox" id="bottomRightCorner">
-                                        <label for="bottomRightCorner">Bund højre</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="cornerSquareOffset">Afstand fra hjørner</label>
-                                    <select id="cornerSquareOffset">
-                                        <option value="0">0</option>
-                                        <option value="10">10</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
-                                        <option value="40">40</option>
-                                        <option value="50">50</option>
-                                        <option value="60" selected>60</option>
-                                        <option value="70">70</option>
-                                        <option value="80">80</option>
-                                        <option value="90">90</option>
-                                        <option value="100">100</option>
-                                        <option value="110">110</option>
-                                        <option value="120">120</option>
-                                        <option value="130">130</option>
-                                        <option value="140">140</option>
-                                        <option value="150">150</option>
-                                        <option value="160">160</option>
-                                        <option value="170">170</option>
-                                        <option value="180">180</option>
-                                        <option value="190">190</option>
-                                        <option value="200">200</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <div class="contact-info">
-                            <p>For faglig support og sparring, er du velkommen til at kontakte neurooptometrist Karsten Haarh på <a href="mailto:G64L@kk.dk">G64L@kk.dk</a>.</p> 
-                            <p>Websitet er stadig under udvikling, så fejl og mangler kan forekomme. Har du brug for hjælp eller oplever udfordringer, er du velkommen til at skrive til Rasmus Paasch på <a href="mailto:dx7p@kk.dk">dx7p@kk.dk.</a></p>
-                            <p>2024 - IBOS</p>
-                        </div>
-                    </div>
-
-                    <div class="fixed-buttons">
-                        <button type="submit">Opdater</button>
-                        <button id="copyLinkButton" type="button">Kopier aktuelt link</button>
-                        <button id="reloadButton" type="button">Nulstil</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div id="chessboard-container"></div>
-    </div>
-    <script src="script.js"></script>
 </body>
 </html>

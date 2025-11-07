@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="da-DK">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBOS - Skaktern</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="confirmDialog" class="confirm-dialog">
+        <div class="confirm-content">
+            <h3>Er du sikker på at du vil nulstille alle indstillinger?</h3>
+            <p>Denne handling kan ikke fortrydes.</p>
+            <div class="confirm-buttons">
+                <button id="confirmNo" class="confirm-no">Annuller</button>
+                <button id="confirmYes" class="confirm-yes">Ja, nulstil</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div id="leftColumn" class="left-column">
+            <button id="menuToggle" class="menu-toggle" aria-label="Åbn menu" aria-expanded="false" aria-controls="offCanvasMenu" tabindex="0"></button>
+        </div>
+        <div id="offCanvasMenu" class="off-canvas-menu" role="navigation" aria-label="Indstillinger menu">
+            <button id="closeMenuToggle" class="menu-toggle close-toggle" aria-label="Luk menu" tabindex="0"></button>
+            <div id="controls">
+                <form id="controlForm" class="menu">
+                    <div class="menu-header">
+                        <h1 class="menu-title">IBOS Skaktern</h1>
+                        <p class="menu-subtitle">Indstillinger</p>
+                    </div>
+
+                    <div class="menu-content">
+                        <fieldset>
+                            <div class="legend-help-wrapper">
+                                <legend>Generelle indstillinger</legend>
+                                <span class="help-icon" data-help="generelleIndstillinger">?</span>
+                            </div>
+                            <div class="help-text" id="help-generelleIndstillinger"></div>
+
+                            <div class="form-group">
+                                <label for="squareSize">Ternstørrelse</label>
+                                <input type="number" id="squareSize" value="10" min="5" step="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="interval">Tidsinterval</label>
+                                <input type="number" id="interval" value="500">
+                            </div>
+                            <div class="form-group">
+                                <label for="redSquareSizeMultiplier">Røde tern - forstørrelsesfaktor</label>
+                                <select id="redSquareSizeMultiplier">
+                                    <option value="1">1x</option>
+                                    <option value="2">2x</option>
+                                    <option value="3">3x</option>
+                                    <option value="4">4x</option>
+                                    <option value="5">5x</option>
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        <div class="section-divider"></div>
+
+                        <fieldset class="edges-fieldset">
+                            <div class="legend-help-wrapper">
+                                <legend>Kanter</legend>
+                                <span class="help-icon" data-help="kanter">?</span>
+                            </div>
+                            <div class="help-text" id="help-kanter"></div>
+
+                            <div class="edge-controls">
+                                <div class="edge-visual">
+                                    <div class="edge-border edge-border-top"></div>
+                                    <div class="edge-border edge-border-right"></div>
+                                    <div class="edge-border edge-border-bottom"></div>
+                                    <div class="edge-border edge-border-left"></div>
+
+                                    <div class="edge-input top">
+                                        <label for="topRed">
+                                            <span aria-hidden="true">Top</span>
+                                            <span class="sr-only">Antal røde tern på top kant</span>
+                                        </label>
+                                        <select id="topRed" aria-label="Antal røde tern på top kant">
+                                            <option value="0">0 tern</option>
+                                            <option value="1">1 tern</option>
+                                            <option value="2">2 tern</option>
+                                            <option value="3">3 tern</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="edge-input right">
+                                        <label for="rightRed">
+                                            <span aria-hidden="true">Højre</span>
+                                            <span class="sr-only">Antal røde tern på højre kant</span>
+                                        </label>
+                                        <select id="rightRed" aria-label="Antal røde tern på højre kant">
+                                            <option value="0">0 tern</option>
+                                            <option value="1">1 tern</option>
+                                            <option value="2">2 tern</option>
+                                            <option value="3">3 tern</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="edge-input bottom">
+                                        <label for="bottomRed">
+                                            <span aria-hidden="true">Bund</span>
+                                            <span class="sr-only">Antal røde tern på bund kant</span>
+                                        </label>
+                                        <select id="bottomRed" aria-label="Antal røde tern på bund kant">
+                                            <option value="0">0 tern</option>
+                                            <option value="1">1 tern</option>
+                                            <option value="2">2 tern</option>
+                                            <option value="3">3 tern</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="edge-input left">
+                                        <label for="leftRed">
+                                            <span aria-hidden="true">Venstre</span>
+                                            <span class="sr-only">Antal røde tern på venstre kant</span>
+                                        </label>
+                                        <select id="leftRed" aria-label="Antal røde tern på venstre kant">
+                                            <option value="0">0 tern</option>
+                                            <option value="1">1 tern</option>
+                                            <option value="2">2 tern</option>
+                                            <option value="3">3 tern</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="redSquareOffset">Afstand fra kanter</label>
+                                    <select id="redSquareOffset">
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                        <option value="60" selected>60</option>
+                                        <option value="70">70</option>
+                                        <option value="80">80</option>
+                                        <option value="90">90</option>
+                                        <option value="100">100</option>
+                                        <option value="110">110</option>
+                                        <option value="120">120</option>
+                                        <option value="130">130</option>
+                                        <option value="140">140</option>
+                                        <option value="150">150</option>
+                                        <option value="160">160</option>
+                                        <option value="170">170</option>
+                                        <option value="180">180</option>
+                                        <option value="190">190</option>
+                                        <option value="200">200</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="section-divider"></div>
+
+                        <fieldset class="corners-fieldset">
+                            <div class="legend-help-wrapper">
+                                <legend>Hjørner</legend>
+                                <span class="help-icon" data-help="hjorner">?</span>
+                            </div>
+                            <div class="help-text" id="help-hjorner"></div>
+
+                            <div class="corner-controls">
+                                <div class="corner-visual">
+                                    <div class="corner-input top-left">
+                                        <input type="checkbox" id="topLeftCorner">
+                                        <label for="topLeftCorner">Top venstre</label>
+                                    </div>
+
+                                    <div class="corner-input top-right">
+                                        <input type="checkbox" id="topRightCorner">
+                                        <label for="topRightCorner">Top højre</label>
+                                    </div>
+
+                                    <div class="center-input">
+                                        <input type="checkbox" id="centerSquare">
+                                        <label for="centerSquare">Center</label>
+                                    </div>
+
+                                    <div class="corner-input bottom-left">
+                                        <input type="checkbox" id="bottomLeftCorner">
+                                        <label for="bottomLeftCorner">Bund venstre</label>
+                                    </div>
+
+                                    <div class="corner-input bottom-right">
+                                        <input type="checkbox" id="bottomRightCorner">
+                                        <label for="bottomRightCorner">Bund højre</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cornerSquareOffset">Afstand fra hjørner</label>
+                                    <select id="cornerSquareOffset">
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                        <option value="60" selected>60</option>
+                                        <option value="70">70</option>
+                                        <option value="80">80</option>
+                                        <option value="90">90</option>
+                                        <option value="100">100</option>
+                                        <option value="110">110</option>
+                                        <option value="120">120</option>
+                                        <option value="130">130</option>
+                                        <option value="140">140</option>
+                                        <option value="150">150</option>
+                                        <option value="160">160</option>
+                                        <option value="170">170</option>
+                                        <option value="180">180</option>
+                                        <option value="190">190</option>
+                                        <option value="200">200</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="menu-footer">
+                            <a href="manual.html" target="_blank" class="menu-link-button">
+                                <span>Faglig vejledning</span>
+                                <span class="arrow">→</span>
+                            </a>
+                            <a href="index.html" class="menu-link-button">
+                                <span>Tilbage til forside</span>
+                                <span class="arrow">→</span>
+                            </a>
+                    </div>
+
+                    <div class="fixed-buttons">
+                        <button type="submit" aria-label="Opdater indstillinger">Opdater</button>
+                        <button id="copyLinkButton" type="button" aria-label="Kopier link til udklipsholder">Kopier aktuelt link</button>
+                        <button id="reloadButton" type="button" aria-label="Nulstil alle indstillinger">Nulstil</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="chessboard-container"></div>
+    </div>
+
+    <!-- Aria-live region for skærmlæser annonceringer -->
+    <div id="ariaLiveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

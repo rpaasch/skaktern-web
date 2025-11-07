@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="da-DK">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilgængelighedserklæring - IBOS Skaktern</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .header {
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #000000;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #6b6b6b;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #007AFF;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #0051D5;
+            text-decoration: underline;
+        }
+
+        .back-link::before {
+            content: '← ';
+        }
+
+        .content h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000000;
+            margin: 40px 0 16px 0;
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        .content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin: 32px 0 12px 0;
+            letter-spacing: -0.2px;
+            line-height: 1.4;
+        }
+
+        .content p {
+            font-size: 16px;
+            color: #1f1f1f;
+            margin: 16px 0;
+            line-height: 1.7;
+        }
+
+        .content ul {
+            font-size: 16px;
+            color: #1f1f1f;
+            margin: 16px 0;
+            padding-left: 24px;
+            line-height: 1.7;
+        }
+
+        .content li {
+            margin: 8px 0;
+        }
+
+        .content a {
+            color: #007AFF;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .content a:hover {
+            color: #0051D5;
+            text-decoration: underline;
+        }
+
+        .content strong {
+            font-weight: 600;
+            color: #000000;
+        }
+
+        .highlight-box {
+            background-color: #f9f9f9;
+            border-left: 3px solid #007AFF;
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box p {
+            margin: 8px 0;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #e5e5e5;
+            margin: 40px 0;
+        }
+
+        .update-date {
+            color: #6b6b6b;
+            font-size: 14px;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .content h2 {
+                font-size: 20px;
+            }
+
+            .content h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">Tilbage til forside</a>
+
+        <div class="header">
+            <h1>Tilgængelighedserklæring</h1>
+            <p>IBOS Skaktern - Vores forpligtelse til digital tilgængelighed</p>
+        </div>
+
+        <div class="content">
+            <p>IBOS er forpligtet til at sikre digital tilgængelighed for alle mennesker, herunder personer med funktionsnedsættelser. Vi arbejder løbende på at forbedre tilgængelighedsoplevelsen på vores værktøjer.</p>
+
+            <h2>Overensstemmelse</h2>
+            <p>IBOS Skaktern sigter mod at overholde <strong>Web Content Accessibility Guidelines (WCAG) 2.1 niveau AA</strong>. Disse retningslinjer forklarer, hvordan man gør webindhold mere tilgængeligt for personer med funktionsnedsættelser.</p>
+
+            <h2>Tilgængelighedsfunktioner</h2>
+
+            <h3>Tastaturnavigation</h3>
+            <ul>
+                <li>Alle funktioner kan tilgås og betjenes udelukkende ved hjælp af tastaturet</li>
+                <li>Logisk tab-rækkefølge gennem alle interaktive elementer</li>
+                <li>Synlig fokusindikator på alle interaktive elementer</li>
+                <li>ESC-tast lukker dialoger og menuer</li>
+                <li>Enter og mellemrum aktiverer knapper og kontroller</li>
+            </ul>
+
+            <h3>Skærmlæserunderstøttelse</h3>
+            <ul>
+                <li>Semantisk HTML-struktur med korrekt brug af overskrifter</li>
+                <li>ARIA-labels og beskrivelser på alle interaktive elementer</li>
+                <li>Live-regioner for dynamiske opdateringer (fx når link kopieres)</li>
+                <li>Beskrivende labels på alle formularfelter</li>
+                <li>Alternativ tekst på ikoner og grafiske elementer</li>
+                <li>Skjulte elementer er utilgængelige for skærmlæsere (aria-hidden)</li>
+            </ul>
+
+            <h3>Visuel tilgængelighed</h3>
+            <ul>
+                <li>Højkontrastfarver der overholder WCAG AA-krav</li>
+                <li>Læsbar skriftstørrelse med systemskrifttyper</li>
+                <li>Responsivt design der virker på alle skærmstørrelser</li>
+                <li>Tekst kan forstørres op til 200% uden tab af funktionalitet</li>
+            </ul>
+
+            <h3>Mobilvenlig</h3>
+            <ul>
+                <li>Fuldt responsivt design optimeret til touch-skærme</li>
+                <li>Tilstrækkelig størrelse på klikbare elementer (minimum 44x44 pixels)</li>
+                <li>Fungerer med skærmrotation (portrait og landscape)</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h2>Kendte begrænsninger</h2>
+
+            <div class="highlight-box">
+                <p><strong>⚠️ Vigtig advarsel om fotosensitivitet</strong></p>
+                <p>Dette værktøj bruger intentionelt blinkende visuelle mønstre som en del af dets funktionalitet. Værktøjet er ikke egnet for personer med fotosensitiv epilepsi eller følsomhed overfor blinkende lys.</p>
+                <p>En tydelig advarsel vises ved adgang til værktøjet.</p>
+            </div>
+
+            <h3>Browser- og hjælpemiddelkompatibilitet</h3>
+            <p>IBOS Skaktern er testet og fungerer med:</p>
+            <ul>
+                <li>Moderne browsere (Chrome, Firefox, Safari, Edge - seneste versioner)</li>
+                <li>NVDA skærmlæser (Windows)</li>
+                <li>JAWS skærmlæser (Windows)</li>
+                <li>VoiceOver (macOS og iOS)</li>
+                <li>TalkBack (Android)</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h2>Feedback og kontakt</h2>
+            <p>Vi ønsker at høre fra dig, hvis du oplever tilgængelighedsbarrierer på IBOS Skaktern:</p>
+
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:dx7p@kk.dk">dx7p@kk.dk</a></li>
+                <li><strong>Emne:</strong> Angiv "Tilgængelighedsfeedback - Skaktern"</li>
+            </ul>
+
+            <p>Vi bestræber os på at besvare henvendelser inden for 2-3 hverdage.</p>
+
+            <h3>Teknisk information</h3>
+            <p>Dette værktøj er bygget med følgende tilgængelighedsstandarder i fokus:</p>
+            <ul>
+                <li>HTML5 semantiske elementer</li>
+                <li>WAI-ARIA 1.2 specifikationer</li>
+                <li>WCAG 2.1 niveau AA retningslinjer</li>
+                <li>Progressiv forbedring med JavaScript</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h2>Evaluering og test</h2>
+            <p>Tilgængeligheden af IBOS Skaktern er evalueret ved hjælp af følgende metoder:</p>
+            <ul>
+                <li>Automatiseret tilgængelighedstest med aXe DevTools</li>
+                <li>Tastaturnavigationstest</li>
+                <li>Skærmlæsertest med NVDA og VoiceOver</li>
+                <li>Farvekontrastanalyse</li>
+                <li>Test på forskellige enheder og skærmstørrelser</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h2>Løbende forbedringer</h2>
+            <p>Vi arbejder kontinuerligt på at forbedre tilgængeligheden på IBOS Skaktern. Fremtidige forbedringer kan omfatte:</p>
+            <ul>
+                <li>Udvidede tastaturgenvejes</li>
+                <li>Yderligere skærmlæseroptimeringer</li>
+                <li>Forbedret kontrastmuligheder</li>
+                <li>Mere omfattende dokumentation</li>
+            </ul>
+
+            <p class="update-date">
+                <strong>Sidst opdateret:</strong> Januar 2025<br>
+                <strong>Version:</strong> 1.0<br>
+                <strong>© 2024-2025 IBOS</strong>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
