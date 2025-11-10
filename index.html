@@ -234,6 +234,38 @@
             padding-top: 20px;
         }
 
+        .device-warning {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.15);
+        }
+
+        .device-warning-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .device-warning h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin: 0 0 12px 0;
+        }
+
+        .device-warning p {
+            font-size: 14px;
+            color: #1f1f1f;
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+
+        .device-warning p:last-child {
+            margin-bottom: 0;
+        }
+
         /* Responsivt design */
         @media (max-width: 968px) {
             .landing-container {
@@ -312,6 +344,14 @@
                     <p><strong>Vigtigt:</strong> Dette værktøj skal kun bruges af fagpersoner med kendskab til fotosensitivitet og visuel stimulation.</p>
                 </div>
 
+                <!-- Device advarsel - vises kun på mobil/tablet -->
+                <div id="device-warning" class="device-warning" style="display: none;" role="alert" aria-live="polite">
+                    <div class="device-warning-icon" aria-hidden="true">📱</div>
+                    <h3>Bemærkning om enhed</h3>
+                    <p>Du besøger denne side fra en mobil eller tablet. For optimal funktion anbefales det at bruge værktøjet på PC-skærm, fladskærms-TV eller Smart Board.</p>
+                    <p>Dette sikrer størst mulig involvering af synsfeltet og synsbanerne.</p>
+                </div>
+
                 <div class="quick-links">
                     <a href="manual.html" class="link-button" target="_blank">Faglig vejledning for professionelle</a>
                     <a href="accessibility.html" class="link-button">Tilgængelighedserklæring</a>
@@ -334,5 +374,40 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Detekter mobil og tablet devices
+        function isMobileOrTablet() {
+            // Check user agent for mobile/tablet keywords
+            const userAgent = navigator.userAgent.toLowerCase();
+            const mobileKeywords = ['android', 'webos', 'iphone', 'ipad', 'ipod', 'blackberry', 'windows phone', 'mobile', 'tablet'];
+            const isMobileUA = mobileKeywords.some(keyword => userAgent.includes(keyword));
+
+            // Check for touch device
+            const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            // Check screen size (mobil/tablets typically < 1280px)
+            const isSmallScreen = window.innerWidth < 1280;
+
+            // Return true hvis nogen af kriterierne er opfyldt
+            return isMobileUA || (hasTouch && isSmallScreen);
+        }
+
+        // Vis advarsel hvis brugeren er på mobil/tablet
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isMobileOrTablet()) {
+                const deviceWarning = document.getElementById('device-warning');
+                if (deviceWarning) {
+                    deviceWarning.style.display = 'block';
+                    console.log('Mobile/tablet device detected');
+
+                    // Annoncér til skærmlæsere
+                    // Bemærk: role="alert" på elementet selv gør at indholdet automatisk annonceres
+                }
+            } else {
+                console.log('Desktop device detected');
+            }
+        });
+    </script>
 </body>
 </html>

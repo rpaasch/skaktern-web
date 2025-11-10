@@ -8,8 +8,109 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .fullscreen-notice {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 16px 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            max-width: 500px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .fullscreen-notice-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fullscreen-notice-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .fullscreen-notice-text {
+            flex: 1;
+        }
+
+        .fullscreen-notice-text p {
+            margin: 0;
+            font-size: 14px;
+            color: #1f1f1f;
+            line-height: 1.5;
+        }
+
+        .fullscreen-notice-text strong {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .fullscreen-notice-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .fullscreen-notice-close:hover {
+            color: #000;
+        }
+
+        .fullscreen-button {
+            margin-top: 8px;
+            padding: 8px 16px;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .fullscreen-button:hover {
+            background-color: #ffb300;
+            transform: translateY(-1px);
+        }
+    </style>
 </head>
 <body>
+    <!-- Fuldskærms-bemærkning -->
+    <div id="fullscreenNotice" class="fullscreen-notice" role="alert" aria-live="polite">
+        <div class="fullscreen-notice-content">
+            <div class="fullscreen-notice-icon" aria-hidden="true">⛶</div>
+            <div class="fullscreen-notice-text">
+                <strong>Bemærkning</strong>
+                <p>For optimal brug anbefales det at køre appen i fuldskærm eller maksimeret vindue.</p>
+                <button id="enterFullscreenBtn" class="fullscreen-button">Gå til fuldskærm</button>
+                <p style="font-size: 12px; margin-top: 8px; opacity: 0.8;">Tryk ESC for at forlade fuldskærm</p>
+            </div>
+            <button id="closeFullscreenNotice" class="fullscreen-notice-close" aria-label="Luk bemærkning">×</button>
+        </div>
+    </div>
     <div id="confirmDialog" class="confirm-dialog">
         <div class="confirm-content">
             <h3>Er du sikker på at du vil nulstille alle indstillinger?</h3>
@@ -251,6 +352,91 @@
 
     <!-- Aria-live region for skærmlæser annonceringer -->
     <div id="ariaLiveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+    <script>
+        // Tjek om vinduet er i fuldskærm eller maksimeret
+        function checkFullscreenOrMaximized() {
+            // Tjek om browseren er i fuldskærm mode
+            const isFullscreen = !!(
+                document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                document.mozFullScreenElement ||
+                document.msFullscreenElement
+            );
+
+            // Tjek om vinduet er maksimeret (eller tæt på det)
+            // Vi giver lidt margin (50px) for at tage højde for OS taskbar osv.
+            const isMaximized = (
+                window.innerWidth >= (screen.availWidth - 50) &&
+                window.innerHeight >= (screen.availHeight - 50)
+            );
+
+            return isFullscreen || isMaximized;
+        }
+
+        // Vis/skjul bemærkning baseret på fuldskærms-status
+        function updateFullscreenNotice() {
+            const notice = document.getElementById('fullscreenNotice');
+            const isOptimal = checkFullscreenOrMaximized();
+
+            // Tjek om brugeren har lukket bemærkningen manuelt (gem i sessionStorage)
+            const userDismissed = sessionStorage.getItem('fullscreenNoticeDismissed') === 'true';
+
+            const shouldShow = !isOptimal && !userDismissed;
+            const wasHidden = notice.style.display === 'none' || !notice.style.display;
+
+            if (shouldShow) {
+                notice.style.display = 'block';
+
+                // Annoncér til skærmlæsere hvis bemærkningen lige er blevet vist
+                if (wasHidden) {
+                    const ariaLive = document.getElementById('ariaLiveRegion');
+                    if (ariaLive) {
+                        ariaLive.textContent = 'Bemærkning: For optimal brug anbefales det at køre appen i fuldskærm eller maksimeret vindue. Tryk ESC for at forlade fuldskærm.';
+                        setTimeout(() => { ariaLive.textContent = ''; }, 3000);
+                    }
+                }
+            } else {
+                notice.style.display = 'none';
+            }
+        }
+
+        // Gå til fuldskærm når brugeren klikker på knappen
+        document.getElementById('enterFullscreenBtn')?.addEventListener('click', function() {
+            const elem = document.documentElement;
+
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+        });
+
+        // Luk bemærkning og gem i session
+        document.getElementById('closeFullscreenNotice')?.addEventListener('click', function() {
+            sessionStorage.setItem('fullscreenNoticeDismissed', 'true');
+            document.getElementById('fullscreenNotice').style.display = 'none';
+        });
+
+        // Tjek ved page load
+        window.addEventListener('load', function() {
+            // Vent lidt så siden er helt loaded
+            setTimeout(updateFullscreenNotice, 500);
+        });
+
+        // Tjek når vinduet ændrer størrelse
+        window.addEventListener('resize', updateFullscreenNotice);
+
+        // Tjek når fuldskærms-status ændres
+        document.addEventListener('fullscreenchange', updateFullscreenNotice);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenNotice);
+        document.addEventListener('mozfullscreenchange', updateFullscreenNotice);
+        document.addEventListener('msfullscreenchange', updateFullscreenNotice);
+    </script>
 
     <script src="script.js"></script>
 </body>
