@@ -411,7 +411,10 @@
                     <a href="mailto:dx7p@kk.dk">dx7p@kk.dk</a></p>
                 </div>
 
-                <p class="copyright">© 2024-2025 IBOS</p>
+                <p class="copyright">
+                    © 2024-2025 IBOS<br>
+                    <span id="version-display" style="font-size: 11px; opacity: 0.7;">Version ...</span>
+                </p>
             </div>
         </div>
     </div>
@@ -509,6 +512,17 @@
         document.addEventListener('webkitfullscreenchange', updateFullscreenWarning);
         document.addEventListener('mozfullscreenchange', updateFullscreenWarning);
         document.addEventListener('msfullscreenchange', updateFullscreenWarning);
+    </script>
+
+    <script src="version.js"></script>
+    <script>
+        // Opdater versionsnummer
+        if (typeof APP_VERSION !== 'undefined') {
+            const versionEl = document.getElementById('version-display');
+            if (versionEl) {
+                versionEl.textContent = 'Version ' + APP_VERSION;
+            }
+        }
     </script>
 </body>
 </html>
