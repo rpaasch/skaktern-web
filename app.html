@@ -95,6 +95,57 @@
             background-color: #ffb300;
             transform: translateY(-1px);
         }
+
+        /* Sørg for at left-column stabler ikoner vertikalt og starter øverst */
+        .left-column {
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+
+        /* Fuldskærm toggle ikon i venstre sidebar */
+        .fullscreen-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+            color: white;
+            transition: transform 0.2s ease;
+            padding: 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4px;
+        }
+
+        .fullscreen-toggle:hover, .fullscreen-toggle:focus {
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .fullscreen-toggle:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+
+        .fullscreen-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .fullscreen-icon {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        /* Skjul fuldskærm toggle når menuen er åben */
+        .off-canvas-menu.open ~ #leftColumn .fullscreen-toggle {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -125,6 +176,14 @@
     <div class="main-container">
         <div id="leftColumn" class="left-column">
             <button id="menuToggle" class="menu-toggle" aria-label="Åbn menu" aria-expanded="false" aria-controls="offCanvasMenu" tabindex="0"></button>
+            <button id="fullscreenToggle" class="fullscreen-toggle" aria-label="Skift til fuldskærm" tabindex="0" title="Skift til fuldskærm (F11)">
+                <svg class="fullscreen-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Expand icon (default) -->
+                    <path class="expand-icon" d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                    <!-- Compress icon (hidden by default) -->
+                    <path class="compress-icon" style="display: none;" d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
+                </svg>
+            </button>
         </div>
         <div id="offCanvasMenu" class="off-canvas-menu" role="navigation" aria-label="Indstillinger menu">
             <button id="closeMenuToggle" class="menu-toggle close-toggle" aria-label="Luk menu" tabindex="0"></button>
@@ -401,20 +460,87 @@
             }
         }
 
-        // Gå til fuldskærm når brugeren klikker på knappen
-        document.getElementById('enterFullscreenBtn')?.addEventListener('click', function() {
+        // Toggle fuldskærm funktion
+        function toggleFullscreen() {
             const elem = document.documentElement;
 
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) {
-                elem.webkitRequestFullscreen();
-            } else if (elem.mozRequestFullScreen) {
-                elem.mozRequestFullScreen();
-            } else if (elem.msRequestFullscreen) {
-                elem.msRequestFullscreen();
+            if (!document.fullscreenElement &&
+                !document.webkitFullscreenElement &&
+                !document.mozFullScreenElement &&
+                !document.msFullscreenElement) {
+                // Gå til fuldskærm
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                // Forlad fuldskærm
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        // Opdater fuldskærm toggle ikon
+        function updateFullscreenToggleIcon() {
+            const isFullscreen = !!(
+                document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                document.mozFullScreenElement ||
+                document.msFullscreenElement
+            );
+
+            const toggleBtn = document.getElementById('fullscreenToggle');
+            const expandIcon = toggleBtn?.querySelector('.expand-icon');
+            const compressIcon = toggleBtn?.querySelector('.compress-icon');
+
+            if (isFullscreen) {
+                expandIcon.style.display = 'none';
+                compressIcon.style.display = 'block';
+                toggleBtn.setAttribute('aria-label', 'Forlad fuldskærm');
+                toggleBtn.setAttribute('title', 'Forlad fuldskærm (ESC)');
+            } else {
+                expandIcon.style.display = 'block';
+                compressIcon.style.display = 'none';
+                toggleBtn.setAttribute('aria-label', 'Skift til fuldskærm');
+                toggleBtn.setAttribute('title', 'Skift til fuldskærm (F11)');
+            }
+        }
+
+        // Fuldskærm toggle knap i sidebar
+        document.getElementById('fullscreenToggle')?.addEventListener('click', function() {
+            toggleFullscreen();
+        });
+
+        // Tastatur support for fuldskærm toggle
+        document.getElementById('fullscreenToggle')?.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleFullscreen();
             }
         });
+
+        // Gå til fuldskærm når brugeren klikker på knappen i notice
+        document.getElementById('enterFullscreenBtn')?.addEventListener('click', function() {
+            toggleFullscreen();
+        });
+
+        // Opdater ikon når fuldskærms-status ændres
+        document.addEventListener('fullscreenchange', updateFullscreenToggleIcon);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenToggleIcon);
+        document.addEventListener('mozfullscreenchange', updateFullscreenToggleIcon);
+        document.addEventListener('msfullscreenchange', updateFullscreenToggleIcon);
 
         // Luk bemærkning og gem i session
         document.getElementById('closeFullscreenNotice')?.addEventListener('click', function() {
@@ -426,6 +552,8 @@
         window.addEventListener('load', function() {
             // Vent lidt så siden er helt loaded
             setTimeout(updateFullscreenNotice, 500);
+            // Opdater fuldskærm toggle ikon
+            updateFullscreenToggleIcon();
         });
 
         // Tjek når vinduet ændrer størrelse

@@ -266,6 +266,39 @@
             margin-bottom: 0;
         }
 
+        .fullscreen-warning {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #2196F3;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+            display: none;
+        }
+
+        .fullscreen-warning-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .fullscreen-warning h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin: 0 0 12px 0;
+        }
+
+        .fullscreen-warning p {
+            font-size: 14px;
+            color: #1f1f1f;
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+
+        .fullscreen-warning p:last-child {
+            margin-bottom: 0;
+        }
+
         /* Responsivt design */
         @media (max-width: 968px) {
             .landing-container {
@@ -352,6 +385,14 @@
                     <p>Dette sikrer størst mulig involvering af synsfeltet og synsbanerne.</p>
                 </div>
 
+                <!-- Fuldskærms-advarsel - vises hvis vinduet ikke er maksimeret -->
+                <div id="fullscreen-warning" class="fullscreen-warning" role="alert" aria-live="polite">
+                    <div class="fullscreen-warning-icon" aria-hidden="true">⛶</div>
+                    <h3>Anbefaling om visning</h3>
+                    <p>For optimal brug af værktøjet anbefales det at maksimere browservinduet eller bruge fuldskærm.</p>
+                    <p style="font-size: 12px; margin-top: 8px; opacity: 0.8;">Tryk F11 (Windows/Linux) eller Control+Command+F (Mac) for fuldskærm</p>
+                </div>
+
                 <div class="quick-links">
                     <a href="manual.html" class="link-button" target="_blank">Faglig vejledning for professionelle</a>
                     <a href="accessibility.html" class="link-button">Tilgængelighedserklæring</a>
@@ -393,6 +434,54 @@
             return isMobileUA || (hasTouch && isSmallScreen);
         }
 
+        // Tjek om vinduet er maksimeret eller i fuldskærm
+        function checkFullscreenOrMaximized() {
+            // Tjek om browseren er i fuldskærm mode
+            const isFullscreen = !!(
+                document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                document.mozFullScreenElement ||
+                document.msFullscreenElement
+            );
+
+            // Tjek om vinduet er maksimeret (eller tæt på det)
+            // Vi giver rimelig margin for OS taskbar, browser chrome osv.
+            // Tjek både bredde og højde med tolerance
+            const widthRatio = window.innerWidth / screen.availWidth;
+            const heightRatio = window.innerHeight / screen.availHeight;
+
+            // Regn som maksimeret hvis vinduet bruger mindst 85% af tilgængelig plads
+            const isMaximized = widthRatio >= 0.85 && heightRatio >= 0.85;
+
+            return isFullscreen || isMaximized;
+        }
+
+        // Opdater fuldskærms-advarsel
+        function updateFullscreenWarning() {
+            const warning = document.getElementById('fullscreen-warning');
+            if (!warning) return;
+
+            const isOptimal = checkFullscreenOrMaximized();
+
+            // Debug info
+            console.log('Fullscreen check:', {
+                width: window.innerWidth,
+                height: window.innerHeight,
+                availWidth: screen.availWidth,
+                availHeight: screen.availHeight,
+                widthRatio: (window.innerWidth / screen.availWidth).toFixed(2),
+                heightRatio: (window.innerHeight / screen.availHeight).toFixed(2),
+                isOptimal: isOptimal,
+                isMobile: isMobileOrTablet()
+            });
+
+            if (!isOptimal && !isMobileOrTablet()) {
+                warning.style.display = 'block';
+            } else {
+                warning.style.display = 'none';
+            }
+        }
+
         // Vis advarsel hvis brugeren er på mobil/tablet
         document.addEventListener('DOMContentLoaded', function() {
             if (isMobileOrTablet()) {
@@ -406,8 +495,20 @@
                 }
             } else {
                 console.log('Desktop device detected');
+
+                // Tjek fuldskærm/maksimeret status på desktop
+                setTimeout(updateFullscreenWarning, 500);
             }
         });
+
+        // Opdater når vinduet ændrer størrelse
+        window.addEventListener('resize', updateFullscreenWarning);
+
+        // Opdater når fuldskærms-status ændres
+        document.addEventListener('fullscreenchange', updateFullscreenWarning);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenWarning);
+        document.addEventListener('mozfullscreenchange', updateFullscreenWarning);
+        document.addEventListener('msfullscreenchange', updateFullscreenWarning);
     </script>
 </body>
 </html>
