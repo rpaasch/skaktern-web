@@ -17,7 +17,7 @@ Denne vejledning beskriver hvordan tekster, kontaktoplysninger og den faglige ve
 
 ## 2. Ret i den faglige vejledning
 
-Den faglige vejledning ligger i filen **`manual.md`**. Den er skrevet i Markdown — et simpelt tekstformat hvor formatering angives med tegn.
+Den faglige vejledning ligger i filen **`manual.md`** (i rodmappen — ikke i `app/`). Den er skrevet i Markdown — et simpelt tekstformat hvor formatering angives med tegn.
 
 ### Markdown-oversigt
 
@@ -59,6 +59,20 @@ Resultat: Dette ord er **fed** og dette er *kursiv*.
 [Klik her for at læse mere](https://example.com)
 ```
 
+**Billede:**
+
+```markdown
+![Beskrivelse af billedet](billede.jpg)
+```
+
+Teksten i firkantparenteserne er en beskrivelse (alt-tekst) som vises hvis billedet ikke kan indlæses. Stien i parenteserne peger på billedfilen — den kan være et filnavn (hvis billedet ligger i samme mappe) eller en fuld webadresse.
+
+Eksempel med en webadresse:
+
+```markdown
+![IBOS Logo](https://ibos.dk/wp-content/uploads/2021/05/cropped-IBOS-logo-PNG-format.png)
+```
+
 ### Eksempel på redigering
 
 Filen starter sådan:
@@ -76,12 +90,11 @@ For at ændre en overskrift rettes teksten efter `##`. For at tilføje et nyt af
 
 ## 3. Ret kontaktoplysninger
 
-Kontaktoplysningerne står i **`index.html`**. Søg efter teksten `Faglig support` — afsnittet ser sådan ud:
+Kontaktoplysningerne står i **`app/index.html`**. Søg efter teksten `Faglig support` — afsnittet ser sådan ud:
 
 ```html
 <p><strong>Faglig support:</strong><br>
-Neurooptometrist Karsten Haarh<br>
-<a href="mailto:G64L@kk.dk">G64L@kk.dk</a></p>
+Neurooptometrist Karsten Haarh</p>
 
 <p><strong>Udviklet af:</strong> Rasmus Paasch</p>
 ```
@@ -89,11 +102,15 @@ Neurooptometrist Karsten Haarh<br>
 ### Sådan ændres det
 
 - **Kontaktnavn**: Erstat f.eks. `Karsten Haarh` med det nye navn.
-- **Email**: Emailadressen skal ændres *to steder* — både i `href="mailto:..."` og i teksten lige efter:
+- **Tilføj email**: Hvis der skal tilføjes en emailadresse, indsættes en linje med et link:
 
 ```html
-<a href="mailto:ny-email@kk.dk">ny-email@kk.dk</a>
+<p><strong>Faglig support:</strong><br>
+Neurooptometrist Karsten Haarh<br>
+<a href="mailto:ny-email@example.dk">ny-email@example.dk</a></p>
 ```
+
+Emailadressen skal stå *to steder* — både i `href="mailto:..."` og i teksten lige efter.
 
 - **Udviklerkreditering**: Linjen `Udviklet af: Rasmus Paasch` er en kreditering uden kontaktinfo.
 
@@ -101,7 +118,7 @@ Neurooptometrist Karsten Haarh<br>
 
 ## 4. Ret tekster på landingsiden
 
-Landingsiden ligger i **`index.html`**. Her er de vigtigste tekster der kan ændres:
+Landingsiden ligger i **`app/index.html`**. Her er de vigtigste tekster der kan ændres:
 
 ### Advarsel om fotosensitivitet
 
@@ -158,7 +175,7 @@ Søg efter `© 2024`:
 
 ## 5. Ret en label i appen
 
-Labels i selve appen står i **`app.html`**. Her er et konkret eksempel — knappen "Kopier aktuelt link".
+Labels i selve appen står i **`app/app.html`**. Her er et konkret eksempel — knappen "Kopier aktuelt link".
 
 Søg efter `Kopier aktuelt link`:
 
@@ -178,10 +195,20 @@ For at ændre knapteksten erstattes teksten mellem `>` og `</button>`:
 
 ## 6. Tjek ændringerne
 
-1. Åbn **`index.html`** i en browser (dobbeltklik på filen).
+1. Åbn **`klik-her-for-at-starte.html`** i en browser (dobbeltklik på filen) — den viderestiller automatisk til appen.
 2. Kontroller at landingsiden ser rigtig ud — tekster, kontaktoplysninger, links.
 3. Klik **"Jeg forstår - Fortsæt til værktøj"** for at åbne appen.
 4. Åbn indstillingsmenuen og kontroller at labels er korrekte.
 5. Klik **"Faglig vejledning for professionelle"** og kontroller at vejledningen vises rigtigt.
 
 Hvis noget ser forkert ud (f.eks. ødelagte tegn eller manglende tekst), kan backuppen bruges til at starte forfra.
+
+---
+
+## 7. Upload til webhotel
+
+Hvis appen skal lægges på et webhotel:
+
+1. Upload hele mappen (inkl. undermappen `app/`) via FTP eller webhotellets filhåndtering.
+2. Mappestrukturen skal bevares — `app/`-mappen skal ligge som undermappe.
+3. Startadressen er `klik-her-for-at-starte.html` (som viderestiller automatisk), eller direkte `app/index.html`.

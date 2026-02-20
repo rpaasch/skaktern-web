@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="da-DK">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redigeringsvejledning - IBOS Skaktern</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .header {
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #000000;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #6b6b6b;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #007AFF;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #0051D5;
+            text-decoration: underline;
+        }
+
+        .back-link::before {
+            content: '← ';
+        }
+
+        #markdown-content {
+            line-height: 1.7;
+        }
+
+        #markdown-content h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #000000;
+            margin: 48px 0 16px 0;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        #markdown-content h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000000;
+            margin: 40px 0 16px 0;
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        #markdown-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin: 32px 0 12px 0;
+            letter-spacing: -0.2px;
+            line-height: 1.4;
+        }
+
+        #markdown-content p {
+            font-size: 16px;
+            color: #1f1f1f;
+            margin: 16px 0;
+            line-height: 1.7;
+        }
+
+        #markdown-content ul,
+        #markdown-content ol {
+            font-size: 16px;
+            color: #1f1f1f;
+            margin: 16px 0;
+            padding-left: 24px;
+            line-height: 1.7;
+        }
+
+        #markdown-content li {
+            margin: 8px 0;
+        }
+
+        #markdown-content code {
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 14px;
+            background-color: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #dc2626;
+        }
+
+        #markdown-content pre {
+            background-color: #f5f5f5;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 24px 0;
+        }
+
+        #markdown-content pre code {
+            background: none;
+            padding: 0;
+            color: #000000;
+        }
+
+        #markdown-content blockquote {
+            margin: 24px 0;
+            padding: 12px 20px;
+            border-left: 3px solid #007AFF;
+            background-color: #f9f9f9;
+            color: #1f1f1f;
+            font-style: italic;
+        }
+
+        #markdown-content a {
+            color: #007AFF;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        #markdown-content a:hover {
+            color: #0051D5;
+            text-decoration: underline;
+        }
+
+        #markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 15px;
+        }
+
+        #markdown-content th,
+        #markdown-content td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        #markdown-content th {
+            font-weight: 600;
+            background-color: #f9f9f9;
+            color: #000000;
+        }
+
+        #markdown-content hr {
+            border: none;
+            border-top: 1px solid #e5e5e5;
+            margin: 40px 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b6b6b;
+            font-size: 16px;
+        }
+
+        .error {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+            color: #dc2626;
+        }
+
+        .error h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .error p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            #markdown-content h1 {
+                font-size: 24px;
+            }
+
+            #markdown-content h2 {
+                font-size: 20px;
+            }
+
+            #markdown-content h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="app/index.html" class="back-link">Tilbage til forside</a>
+
+        <div class="header">
+            <h1>Redigeringsvejledning</h1>
+            <p>Sådan redigeres tekster og indhold i IBOS Skaktern</p>
+        </div>
+
+        <div id="markdown-content" class="loading">
+            Indlæser vejledning...
+        </div>
+    </div>
+
+    <!-- Inline markdown som fallback for lokal visning -->
+    <script type="text/markdown" id="inline-markdown">
+# Vejledning: Redigering af indhold
+
+Denne vejledning beskriver hvordan tekster, kontaktoplysninger og den faglige vejledning i appen kan redigeres. Det kræver ingen programmeringsviden.
+
+---
+
+## 1. Før der redigeres
+
+- **Brug en simpel teksteditor** — f.eks. Notesblok (Windows) eller TextEdit (Mac). Undgå Word eller lignende, da det kan tilføje usynlig formatering.
+  - I TextEdit: Vælg *Format → Konverter til ren tekst* inden redigering.
+- **Tag en backup** — kopier hele mappen inden der ændres noget, så det altid er muligt at gå tilbage.
+- **Gem som UTF-8** — dette sikrer at æ, ø og å vises korrekt.
+  - Notesblok: Vælg *Gem som…* → Kodning: **UTF-8**.
+  - TextEdit: Vælg *Gem som…* → Kodning: **Unicode (UTF-8)**.
+
+---
+
+## 2. Ret i den faglige vejledning
+
+Den faglige vejledning ligger i filen **`manual.md`** (i rodmappen — ikke i `app/`). Den er skrevet i Markdown — et simpelt tekstformat hvor formatering angives med tegn.
+
+### Markdown-oversigt
+
+**Overskrifter** — antal `#` bestemmer niveauet:
+
+```markdown
+# Stor overskrift
+## Mellem overskrift
+### Lille overskrift
+```
+
+**Fed og kursiv tekst:**
+
+```markdown
+Dette ord er **fed** og dette er *kursiv*.
+```
+
+Resultat: Dette ord er **fed** og dette er *kursiv*.
+
+**Punktliste:**
+
+```markdown
+- Første punkt
+- Andet punkt
+- Tredje punkt
+```
+
+**Nummereret liste:**
+
+```markdown
+1. Første punkt
+2. Andet punkt
+3. Tredje punkt
+```
+
+**Link:**
+
+```markdown
+[Klik her for at læse mere](https://example.com)
+```
+
+**Billede:**
+
+```markdown
+![Beskrivelse af billedet](billede.jpg)
+```
+
+Teksten i firkantparenteserne er en beskrivelse (alt-tekst) som vises hvis billedet ikke kan indlæses. Stien i parenteserne peger på billedfilen — den kan være et filnavn (hvis billedet ligger i samme mappe) eller en fuld webadresse.
+
+Eksempel med en webadresse:
+
+```markdown
+![IBOS Logo](https://ibos.dk/wp-content/uploads/2021/05/cropped-IBOS-logo-PNG-format.png)
+```
+
+### Eksempel på redigering
+
+Filen starter sådan:
+
+```markdown
+# Synsfelts-træningsapp - Dokumentation
+
+## 1. Tanker bag app
+...
+```
+
+For at ændre en overskrift rettes teksten efter `##`. For at tilføje et nyt afsnit skrives almindelig tekst på en ny linje.
+
+---
+
+## 3. Ret kontaktoplysninger
+
+Kontaktoplysningerne står i **`app/index.html`**. Søg efter teksten `Faglig support` — afsnittet ser sådan ud:
+
+```html
+<p><strong>Faglig support:</strong><br>
+Neurooptometrist Karsten Haarh</p>
+
+<p><strong>Udviklet af:</strong> Rasmus Paasch</p>
+```
+
+### Sådan ændres det
+
+- **Kontaktnavn**: Erstat f.eks. `Karsten Haarh` med det nye navn.
+- **Tilføj email**: Hvis der skal tilføjes en emailadresse, indsættes en linje med et link:
+
+```html
+<p><strong>Faglig support:</strong><br>
+Neurooptometrist Karsten Haarh<br>
+<a href="mailto:ny-email@example.dk">ny-email@example.dk</a></p>
+```
+
+Emailadressen skal stå *to steder* — både i `href="mailto:..."` og i teksten lige efter.
+
+- **Udviklerkreditering**: Linjen `Udviklet af: Rasmus Paasch` er en kreditering uden kontaktinfo.
+
+---
+
+## 4. Ret tekster på landingsiden
+
+Landingsiden ligger i **`app/index.html`**. Her er de vigtigste tekster der kan ændres:
+
+### Advarsel om fotosensitivitet
+
+Søg efter `Advarsel om fotosensitivitet`:
+
+```html
+<h1>Advarsel om fotosensitivitet</h1>
+<p>Dette værktøj bruger blinkende mønstre som kan udløse anfald hos
+   personer med fotosensitivitet eller epilepsi.</p>
+```
+
+Advarselteksten kan ændres direkte mellem `<p>` og `</p>`.
+
+### Appens titel og beskrivelse
+
+Søg efter `IBOS Skaktern`:
+
+```html
+<h1 class="app-title">IBOS Skaktern</h1>
+<p class="app-subtitle">Et professionelt værktøj til neurooptometri
+   og synstræning</p>
+```
+
+### Om-tekst
+
+Søg efter `Om værktøjet`:
+
+```html
+<h2>Om værktøjet</h2>
+<p>IBOS Skaktern er udviklet til professionelle indenfor
+   neurooptometri. ...</p>
+```
+
+### Links til vejledning og tilgængelighed
+
+Søg efter `Faglig vejledning`:
+
+```html
+<a href="manual.html" ...>Faglig vejledning for professionelle</a>
+<a href="accessibility.html" ...>Tilgængelighedserklæring</a>
+```
+
+Linkteksterne kan ændres mellem `>` og `</a>`.
+
+### Copyright
+
+Søg efter `© 2024`:
+
+```
+© 2024-2025 IBOS
+```
+
+---
+
+## 5. Ret en label i appen
+
+Labels i selve appen står i **`app/app.html`**. Her er et konkret eksempel — knappen "Kopier aktuelt link".
+
+Søg efter `Kopier aktuelt link`:
+
+```html
+<button id="copyLinkButton" type="button">Kopier aktuelt link</button>
+```
+
+For at ændre knapteksten erstattes teksten mellem `>` og `</button>`:
+
+```html
+<button id="copyLinkButton" type="button">Kopier link til udklipsholder</button>
+```
+
+> **Vigtigt**: Ændr kun teksten mellem `>` og `<`. Attributter som `id="..."` eller `type="..."` skal ikke røres.
+
+---
+
+## 6. Tjek ændringerne
+
+1. Åbn **`klik-her-for-at-starte.html`** i en browser (dobbeltklik på filen) — den viderestiller automatisk til appen.
+2. Kontroller at landingsiden ser rigtig ud — tekster, kontaktoplysninger, links.
+3. Klik **"Jeg forstår - Fortsæt til værktøj"** for at åbne appen.
+4. Åbn indstillingsmenuen og kontroller at labels er korrekte.
+5. Klik **"Faglig vejledning for professionelle"** og kontroller at vejledningen vises rigtigt.
+
+Hvis noget ser forkert ud (f.eks. ødelagte tegn eller manglende tekst), kan backuppen bruges til at starte forfra.
+
+---
+
+## 7. Upload til webhotel
+
+Hvis appen skal lægges på et webhotel:
+
+1. Upload hele mappen (inkl. undermappen `app/`) via FTP eller webhotellets filhåndtering.
+2. Mappestrukturen skal bevares — `app/`-mappen skal ligge som undermappe.
+3. Startadressen er `klik-her-for-at-starte.html` (som viderestiller automatisk), eller direkte `app/index.html`.
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script>
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        function renderMarkdown(markdown) {
+            const content = document.getElementById('markdown-content');
+            content.innerHTML = marked.parse(markdown);
+            content.classList.remove('loading');
+        }
+
+        fetch('vejledning-redigering.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Kunne ikke finde vejledning-redigering.md');
+                }
+                return response.text();
+            })
+            .then(markdown => {
+                renderMarkdown(markdown);
+            })
+            .catch(error => {
+                console.log('Bruger inline markdown (lokal visning)');
+                const inlineMarkdown = document.getElementById('inline-markdown').textContent;
+                renderMarkdown(inlineMarkdown);
+            });
+    </script>
+</body>
+</html>

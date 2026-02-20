@@ -475,7 +475,7 @@ Patienter for at bruge tid og energi på, at afprøve og give tilbagemelding på
         }
 
         // Prøv først at indlæse fra ekstern fil (virker på webserver)
-        fetch('manual.md')
+        fetch('../manual.md')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Kunne ikke finde manual.md');
