@@ -17,17 +17,17 @@ Gennem årene er jeg ofte stødt på spørgsmål om evidensen for og profitering
 
 Den klassiske holdning er, at man ikke kan forvente nogen generhvervelse af synsfeltstabet udover den spontane selvheling, som kan ske de første 3-4 måneder efter skaden.
 
-Men der er de senere år begyndt at blive skrevet flere artikler, som peger på, at det kan være muligt at generhverve synet i det tabte område. Og vores erfaring på IBOS er at der er personer med synsfeltstab som generhverver dele at mistet synsfelt gennem anden stimulerende og kompenserende undervisning.
+Men der er de senere år begyndt at blive skrevet flere artikler, som peger på, at det kan være muligt at generhverve synet i det tabte område. Og vores erfaring på IBOS er at der er personer med synsfeltstab som generhverver dele af mistet synsfelt gennem anden stimulerende og kompenserende undervisning.
 
 Yderligere har forskning vist, at visuel-kognitiv plasticitet kan føre til generhvervelse af synsevnen i et område med synsfeltsudfald.
 
-Erfaringen hos mig g mine kolleger som også arbejder med synsfeltsrehabilitering her på IBOS er, at der ses delvis og i nogle tilfælde nær-fuld generhvervelse af synsfletstab/-udfald undervejs i forbindelse med kompenserende undervisning, og at dette også sker selv om det for nogle patienter er flere år siden skaden er sket.
+Erfaringen hos mig og mine kolleger som også arbejder med synsfeltsrehabilitering her på IBOS er, at der ses delvis og i nogle tilfælde nær-fuld generhvervelse af synsfeltstab/-udfald undervejs i forbindelse med kompenserende undervisning, og at dette også sker selv om det for nogle patienter er flere år siden skaden er sket.
 
 Jeg tænker ikke at denne app kan stå alene i synsrehabiliteringsarbejde ved synsfeltsudfald.
 
 Men det er et redskab blandt mange, der kan give en effekt på en måde der ellers ikke er almindeligt brugt.
 
-Der er flere andre relevante tilgange ved synfeltsrehabilitering, bl.a.
+Der er flere andre relevante tilgange ved synsfeltsrehabilitering, bl.a.
 
 - Teknikker, hvor flere sanser stimuleres samtidigt for at forsøge at øge den mentale og kognitive stimulation og skabe biofeedback.
 - Teknikker og øvelser der laves i et hverdags-relevant miljø.
@@ -82,7 +82,7 @@ Kommende resultater fra NVT-forskningsprojektet (Neuro Vision Technology) på IB
 
 ![Skærmbillede - App interface]()
 
-Når feltværdier skal rettes, opdateres og der skal laves link till den udgave personen skal bruge hjemme.
+Når feltværdier skal rettes, opdateres og der skal laves link til den udgave personen skal bruge hjemme.
 
 ![Skærmbillede - Indtastningsfelter]()
 
@@ -111,13 +111,13 @@ Når feltværdier skal rettes, opdateres og der skal laves link till den udgave 
 
 ### Kanter
 
-**Top:** Her indstiller du, hvor mange røde tern der skal være i toppen af skaktern-mønsteret. Vælg mellem 0, 1, 2 og 3. Kan bruges, når hele synsfeltet i de 2 nedre kvadranter mangler (nedre kvardrant- eller hemianopsi).
+**Top:** Her indstiller du, hvor mange røde tern der skal være i toppen af skaktern-mønsteret. Vælg mellem 0, 1, 2 og 3. Kan bruges, når hele synsfeltet i de 2 nedre kvadranter mangler (nedre kvadrant- eller hemianopsi).
 
 **Venstre:** Her indstiller du, hvor mange røde tern der skal være i venstre side af skaktern-mønsteret. Vælg mellem 0, 1, 2, og 3. Kan bruges, når der er synsfeltsudfald i hele højre del af synsfeltet (højresidig hemianopsi).
 
 **Højre:** Her indstiller du, hvor mange røde tern der skal være i højre side af skaktern-mønsteret. Vælg mellem 0, 1, 2, og 3. Kan bruges, når der er synsfeltsudfald i hele venstre del af synsfeltet (venstresidig hemianopsi).
 
-**Bund:** Her indstiller du, hvor mange røde tern der skal være i bunden af skaktern-mønsteret. Vælg mellem 0, 1, 2, og 3. Kan bruges, når der er synsfeltsudfald i de 2 øvre kvadranter (øvre kvardrant- eller hemianopsi).
+**Bund:** Her indstiller du, hvor mange røde tern der skal være i bunden af skaktern-mønsteret. Vælg mellem 0, 1, 2, og 3. Kan bruges, når der er synsfeltsudfald i de 2 øvre kvadranter (øvre kvadrant- eller hemianopsi).
 
 **Afstand fra kanter:** Her indstiller du, hvor langt inde de røde tern skal være i skakternmønsteret (tallene angiver hvor mange pixels det er placeret fra kanten (0-200 med spring på 10). Jo højere tal – jo længere inde (tallene angiver hvor mange tern det markerede er fra kanten). Skal afprøves med personen, som skal øve med app'en. Som udgangspunkt vælges den indstilling, som giver mest ro, og hvor der ses en smal bræmme med flicker/bevægelse.
 
@@ -129,7 +129,7 @@ Når feltværdier skal rettes, opdateres og der skal laves link till den udgave 
 
 **Top Venstre:** Her indstiller du, om der skal være en rød tern i det øverste venstre hjørne. Sæt flueben, hvis du vil have en rød tern i øverste venstre hjørne. Kan bruges, når der er synsfeltsudfald i nedre højre kvadrant (nedre højre kvadrantanopsi).
 
-**Top Højre:** Her indstiller du, om der skal være en rød tern i det øverste venstre hjørne. Sæt flueben, hvis du vil have en rød tern i øverste højre hjørne. Kan bruges, når der er synsfeltsudfald i nedre venstre kvadrant (nedre venstre kvadrantanopsi).
+**Top Højre:** Her indstiller du, om der skal være en rød tern i det øverste højre hjørne. Sæt flueben, hvis du vil have en rød tern i øverste højre hjørne. Kan bruges, når der er synsfeltsudfald i nedre venstre kvadrant (nedre venstre kvadrantanopsi).
 
 **Vis centerfirkant:** Her indstiller du, om der skal være en rød tern centralt. Sæt flueben, hvis du vil have en rød tern placeret i centrum. Kan bruges, når der ønskes generel stimulation af hele synsfeltet; f.eks. ved perifer funktionel kollaps af synsfeltet, dvs. når der kan ses manglende funktionel udnyttelse og integration af det perifere synsfelt.
 
@@ -172,22 +172,22 @@ Med de patienter jeg har haft mulighed for at afprøve appen, er det min erfarin
 - Justere på ternstørrelse (både rød fikseringstern og navnlig de hvide og sorte), når det er muligt.
 - Passe på med at patienten ikke arbejder med denne app for lang tid ad gangen i starten.
 - Spørg ind til evt. gener og ubehag ved afprøvning i klinikken hver gang før patienten sendes hjem med link ved opstarten og senere i et forløb med opdateret version (nyt link).
-- Gøre opmærksom på, at patienten skal kontakte optometristen hvis der opstår gener eller tvivl om brugen af appèn.
+- Gøre opmærksom på, at patienten skal kontakte optometristen hvis der opstår gener eller tvivl om brugen af app'en.
 - Det vurderes ikke at være hensigtsmæssigt at bruge app'en på mobiltelefon eller tablet. For at få så stor som muligt en del af synsfeltet og synsbanerne involveret anbefales PC-skærm, fladskærm-TV eller Smart Board.
 
-**Link til appèn:** https://ibos.dk/skak/
+**Link til app'en:** https://ibos.dk/skak/
 
 ---
 
 ## 4. Tak til
 
-Ledelsen på IBOS for at stille ressourcer til rådighed for udviklingen af denne ap.
+Ledelsen på IBOS for at stille ressourcer til rådighed for udviklingen af denne app.
 
 Rasmus Paasch, IKT-konsulent og kollega på IBOS for sparring og programmering af app'en.
 
 Steen Aalberg, Susanne Sonne og kolleger i Irisgruppen for sparring og rådgivning.
 
-Kolleger på IBOS for respons og sparring ved afprøvning af ppèn.
+Kolleger på IBOS for respons og sparring ved afprøvning af app'en.
 
 Patienter for at bruge tid og energi på, at afprøve og give tilbagemelding på brug af app'en.
 
